@@ -59,5 +59,14 @@ namespace VehicleSkins.Localization {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Multiplies vehicles skins possibilities.
+        /// </summary>
+        internal static string root_modDescription {
+            get {
+                return ResourceManager.GetString("root_modDescription", resourceCulture);
+            }
+        }
     }
 }
