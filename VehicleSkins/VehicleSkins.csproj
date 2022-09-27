@@ -11,7 +11,7 @@
     <AssemblyName>VehicleSkins</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <Deterministic>false</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,10 +68,14 @@
   <ItemGroup>
     <EmbeddedResource Include="Localization\Str.*.resx" />
     <EmbeddedResource Include="Localization\Str.resx">
-      <LastGenOutput>Str.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Str.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\**\*.png" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Localization\Str.Designer.cs">
@@ -79,18 +83,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Str.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Shader\**\*.unity3d" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="UI\VersionNotes.txt" />
     <Compile Include="**\*.cs" Exclude="Localization\Str.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KwyttoUtilityVS\KwyttoUtilityVS.csproj">
-      <Project>{27c920f8-f40f-4d56-bcb6-9c9025ed0a0c}</Project>
+      <Project>{27C920F8-F40F-4D56-BCB6-9C9025ED0A0C}</Project>
       <Name>KwyttoUtilityVS</Name>
     </ProjectReference>
   </ItemGroup>

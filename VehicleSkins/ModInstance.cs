@@ -1,9 +1,12 @@
 using Kwytto.Interfaces;
 using Kwytto.Utils;
 using System.Globalization;
+using System.Reflection;
 using UnityEngine;
 using VehicleSkins.Localization;
+using VehicleSkins.UI;
 
+[assembly: AssemblyVersion("0.0.0.*")]
 namespace VehicleSkins
 {
     public class ModInstance : BasicIUserMod<ModInstance, MainController>
@@ -19,5 +22,16 @@ namespace VehicleSkins
         public override string Description => Str.root_modDescription;
 
         protected override void SetLocaleCulture(CultureInfo culture) => Str.Culture = culture;
+
+        private IUUIButtonContainerPlaceholder[] cachedUUI;
+        public override IUUIButtonContainerPlaceholder[] UUIButtons => cachedUUI ?? (cachedUUI = new[]
+        {
+            new UUIWindowButtonContainerPlaceholder(
+                buttonName: Instance.SimpleName,
+                tooltip: Instance.GeneralName,
+                iconPath: "ModIcon",
+                windowGetter: ()=>VSBaseLiteUI.Instance
+             )
+        });
     }
 }

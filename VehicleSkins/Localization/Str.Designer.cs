@@ -68,5 +68,146 @@ namespace VehicleSkins.Localization {
                 return ResourceManager.GetString("root_modDescription", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Filter assets having at least one skin.
+        /// </summary>
+        internal static string VS_ACTIVERULESONLY {
+            get {
+                return ResourceManager.GetString("VS_ACTIVERULESONLY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Create new skin.
+        /// </summary>
+        internal static string VS_CREATENEWSKIN {
+            get {
+                return ResourceManager.GetString("VS_CREATENEWSKIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a &lt;color yellow&gt;There&apos;s already a skin with this name!&lt;/color&gt;.
+        /// </summary>
+        internal static string VS_CREATESKIN_ERROR_ALREADYEXISTS {
+            get {
+                return ResourceManager.GetString("VS_CREATESKIN_ERROR_ALREADYEXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Type the new skin name:.
+        /// </summary>
+        internal static string VS_CREATESKIN_MESSAGE {
+            get {
+                return ResourceManager.GetString("VS_CREATESKIN_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 
+        ///      Skin files created!
+        ///      See files in the folder, edit them and reload in game to see the changes_
+        ///    .
+        /// </summary>
+        internal static string VS_CREATESKIN_MSGSUC {
+            get {
+                return ResourceManager.GetString("VS_CREATESKIN_MSGSUC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Export shared to workshop.
+        /// </summary>
+        internal static string VS_EXPORTASSET {
+            get {
+                return ResourceManager.GetString("VS_EXPORTASSET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a 
+        ///      Do you want to erase all skins already exported to workshop?
+        ///      Note the ones with the same name will be overwritten anyway_
+        ///    .
+        /// </summary>
+        internal static string VS_EXPORTTOASSET_MSG {
+            get {
+                return ResourceManager.GetString("VS_EXPORTTOASSET_MSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Files exported to be uploaded successfully!.
+        /// </summary>
+        internal static string VS_EXPORTTOASSET_MSGSUC {
+            get {
+                return ResourceManager.GetString("VS_EXPORTTOASSET_MSGSUC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Export shared skins to upload to Workshop.
+        /// </summary>
+        internal static string VS_EXPORTTOASSET_TITLE {
+            get {
+                return ResourceManager.GetString("VS_EXPORTTOASSET_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Select model.
+        /// </summary>
+        internal static string VS_MODELSELECT {
+            get {
+                return ResourceManager.GetString("VS_MODELSELECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Reload all skins.
+        /// </summary>
+        internal static string VS_RELOADALLSKINS {
+            get {
+                return ResourceManager.GetString("VS_RELOADALLSKINS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Reload all skins from current asset.
+        /// </summary>
+        internal static string VS_RELOADASSETSKINS {
+            get {
+                return ResourceManager.GetString("VS_RELOADASSETSKINS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Skin source legend: &lt;color=gray&gt;Original skin&lt;/color&gt; &lt;color=green&gt;Workshop/Staging&lt;/color&gt; &lt;color=yellow&gt;Shared Folder&lt;/color&gt;.
+        /// </summary>
+        internal static string VS_SOURCECOLOR_LEGEND {
+            get {
+                return ResourceManager.GetString("VS_SOURCECOLOR_LEGEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a There are no skins loaded for this vehicle model.
+        /// </summary>
+        internal static string VS_THEREARENOSKINS {
+            get {
+                return ResourceManager.GetString("VS_THEREARENOSKINS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Open files folder.
+        /// </summary>
+        internal static string VS_VIEWFILES {
+            get {
+                return ResourceManager.GetString("VS_VIEWFILES", resourceCulture);
+            }
+        }
     }
 }

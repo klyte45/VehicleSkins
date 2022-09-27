@@ -120,4 +120,31 @@
   <data name="root_modDescription" xml:space="preserve">
     <value>Multiplies vehicles skins possibilities</value>
   </data>
+  <data name="VS_MODELSELECT" xml:space="preserve">    <value>Select model</value>  </data>
+  <data name="VS_THEREARENOSKINS" xml:space="preserve">    <value>There are no skins loaded for this vehicle model</value>  </data>
+  <data name="VS_CREATENEWSKIN" xml:space="preserve">    <value>Create new skin</value>  </data>
+  <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">    <value>Type the new skin name:</value>  </data>
+  <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">    <value>&lt;color yellow&gt;There's already a skin with this name!&lt;/color&gt;</value>  </data>
+  <data name="VS_RELOADALLSKINS" xml:space="preserve">    <value>Reload all skins</value>  </data>
+  <data name="VS_RELOADASSETSKINS" xml:space="preserve">    <value>Reload all skins from current asset</value>  </data>
+  <data name="VS_ACTIVERULESONLY" xml:space="preserve">    <value>Filter assets having at least one skin</value>  </data>
+  <data name="VS_EXPORTTOASSET_TITLE" xml:space="preserve">    <value>Export shared skins to upload to Workshop</value>  </data>
+    <data name="VS_EXPORTTOASSET_MSG" xml:space="preserve">
+    <value>
+      Do you want to erase all skins already exported to workshop?
+      Note the ones with the same name will be overwritten anyway_
+    </value>
+  </data>
+  <data name="VS_EXPORTASSET" xml:space="preserve">    <value>Export shared to workshop</value>  </data>
+  <data name="VS_EXPORTTOASSET_MSGSUC" xml:space="preserve">    <value>Files exported to be uploaded successfully!</value>  </data>
+
+  <data name="VS_VIEWFILES" xml:space="preserve">    <value>Open files folder</value>  </data>
+  <data name="VS_SOURCECOLOR_LEGEND" xml:space="preserve">    <value>Skin source legend: &lt;color=gray&gt;Original skin&lt;/color&gt; &lt;color=green&gt;Workshop/Staging&lt;/color&gt; &lt;color=yellow&gt;Shared Folder&lt;/color&gt;</value>  </data>
+   <data name="VS_CREATESKIN_MSGSUC" xml:space="preserve">
+    <value>
+      Skin files created!
+      See files in the folder, edit them and reload in game to see the changes_
+    </value>
+  </data>
+
 </root>

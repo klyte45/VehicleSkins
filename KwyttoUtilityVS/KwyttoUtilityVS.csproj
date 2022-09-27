@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>
     </RootNamespace>
-    <AssemblyName>KwyttoUtilityWE</AssemblyName>
+    <AssemblyName>KwyttoUtilityVS</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -72,6 +72,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Kwytto\Utils\PrefabUtils.cs" />
+    <Compile Include="Kwytto\Utils\SceneUtils.cs" />
+    <Compile Include="Kwytto\Utils\TextureUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Kwytto\Localization\KStr.*.resx" />

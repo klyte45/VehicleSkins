@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // As informações gerais sobre um assembly são controladas por
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associada a um assembly.
-[assembly: AssemblyTitle("KwyttoUtilityWE")]
+[assembly: AssemblyTitle("KwyttoUtilityVS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KwyttoUtilityWE")]
+[assembly: AssemblyProduct("KwyttoUtilityVS")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // O GUID a seguir será destinado à ID de typelib se este projeto for exposto para COM
-[assembly: Guid("27c920f8-f40f-4d56-bcb6-9c9025ed0aac")]
+[assembly: Guid("27c920f8-f40f-4d56-bcb6-9c9025ed000c")]
 
 // As informações da versão de um assembly consistem nos quatro valores a seguir:
 //
