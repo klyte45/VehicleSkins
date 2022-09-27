@@ -1,0 +1,10 @@
+<size=16>
+<size=30><color=yellow>Welcome to Vehicle Skins 1.1!</color></size>
+
+In this version the news are:
+
+- Added integration with Write Everywhere
+- Now the camera will focus at picked vehicle to preview skins
+- Added a field to select the skin to be previewed
+- Mod rewritten in new Kwytto Framework
+</size>

@@ -15,7 +15,7 @@ namespace Bridge_VS2WE
 
         public abstract bool IsWEVehicleEditorOpen { get; }
         public abstract bool IsAnyEditorOpen { get; }
-        public abstract string currentSelectionSkin { get; }
-        public abstract ushort currentFocusVehicle { get; }
+        public abstract string CurrentSelectionSkin { get; }
+        public abstract ushort CurrentFocusVehicle { get; }
     }
 }

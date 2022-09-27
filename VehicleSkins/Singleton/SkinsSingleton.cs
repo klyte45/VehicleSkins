@@ -409,10 +409,10 @@ namespace VehicleSkins.Singleton
             if (m_skins.TryGetValue(info.name, out var skinData))
             {
                 if (ModInstance.Controller.ConnectorWE.IsWEVehicleEditorOpen
-                    && ModInstance.Controller.ConnectorWE.currentFocusVehicle == vehicleId
-                    && !VSBaseLiteUI.GrabbedIsParked)
+                    && ModInstance.Controller.ConnectorWE.CurrentFocusVehicle == vehicleId
+                    && !isParked)
                 {
-                    return ModInstance.Controller.ConnectorWE.currentSelectionSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);
+                    return ModInstance.Controller.ConnectorWE.CurrentSelectionSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);
                 }
                 if (VSBaseLiteUI.Instance.Visible
                 //&& VSBaseLiteUI.LockSelection 

@@ -20,9 +20,9 @@ namespace K45_VS2WE
         public override bool IsAnyEditorOpen => WEFacade.IsAnyEditorOpen;
 
         private readonly List<LayoutDescriptorVehicleXml> m_skinLayouts = new List<LayoutDescriptorVehicleXml>();
-        public override string currentSelectionSkin => WEFacade.CurrentSelectedSkin;
+        public override string CurrentSelectionSkin => WEFacade.CurrentSelectedSkin;
 
-        public override ushort currentFocusVehicle => WEFacade.CurrentGrabbedVehicleId;
+        public override ushort CurrentFocusVehicle => WEFacade.CurrentGrabbedVehicleId;
 
         public override void ClearWELayoutRegisters() => m_skinLayouts.Clear();
         public override bool GetSkinDescriptorForVehicle<T>(VehicleInfo vehicle, ushort vehicleId, bool isParked, out T layout)

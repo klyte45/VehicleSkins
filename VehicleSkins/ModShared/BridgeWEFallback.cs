@@ -12,9 +12,9 @@ namespace VehicleSkins.ModShared
 
         public override bool IsAnyEditorOpen { get; } = false;
 
-        public override string currentSelectionSkin { get; } = null;
+        public override string CurrentSelectionSkin { get; } = null;
 
-        public override ushort currentFocusVehicle { get; } = 0;
+        public override ushort CurrentFocusVehicle { get; } = 0;
 
         public override void ClearWELayoutRegisters() { }
 

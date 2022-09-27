@@ -210,9 +210,9 @@ namespace VehicleSkins.UI
         private bool m_isPackageLoaded;
         private Vector2 m_horizontalScroll;
 
-        protected override void DrawWindow()
+        protected override void DrawWindow(Vector2 size)
         {
-            var area = new Rect(5, 25, WindowRect.width - 10, WindowRect.height - 25);
+            var area = new Rect(default, size);
             using (new GUILayout.AreaScope(area))
             {
                 switch (m_currentState)
