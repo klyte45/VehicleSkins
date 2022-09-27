@@ -25,6 +25,16 @@ namespace VehicleSkins.UI
         private Vector2 m_scrollSkins;
         private Coroutine m_currentReloadCoroutine;
         private string[] m_currentSelectedSkin;
+        private State m_currentScreenState = State.Normal;
+        private int m_forcedSkinId;
+
+        public string ForcedSkinOnSelected => m_forcedSkinId < m_currentSkinsMaterialsNames.Length && m_forcedSkinId > 0 ? m_currentSkinsMaterialsNames[m_forcedSkinId].TrimToNull() ?? "<DEFAULT>" : null;
+
+        private enum State
+        {
+            Normal,
+            AskingName
+        }
 
         public string GetCurentSelectedSkinAtIndex(int idx) => m_currentSelectedSkin?[idx];
 
@@ -42,6 +52,81 @@ namespace VehicleSkins.UI
             {
                 return;
             }
+            switch (m_currentScreenState)
+            {
+                case State.Normal:
+                    DrawNormal(rect, currentInfo, currentInfoIndex);
+                    return;
+                case State.AskingName:
+                    DrawAskingName(rect, currentInfo, currentInfoIndex);
+                    return;
+            }
+
+        }
+
+        private string m_currentInputCreateValue;
+        private void DrawAskingName(Rect rect, VehicleInfo currentInfo, int currentInfoIndex)
+        {
+            GUIKwyttoCommons.TextWithLabel(rect.width, Str.VS_CREATESKIN_MESSAGE, m_currentInputCreateValue, (x) => m_currentInputCreateValue = x, true);
+            using (new GUILayout.HorizontalScope())
+            {
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button(Locale.Get("CREATE")))
+                {
+                    var newName = m_currentInputCreateValue.TrimToNull();
+                    if (newName.IsNullOrWhiteSpace() || m_currentSkinsMaterials.Any(x => x.skinName == newName))
+                    {
+                        KwyttoDialog.ShowModal(new KwyttoDialog.BindProperties
+                        {
+                            message = Str.VS_CREATESKIN_ERROR_ALREADYEXISTS,
+                            messageAlign = TextAnchor.MiddleCenter,
+                            messageTextSizeMultiplier = 2,
+                            buttons = KwyttoDialog.basicOkButtonBar
+                        });
+                    }
+                    else
+                    {
+                        var dir = SkinsSingleton.instance.CreateSkin(m_currentInfo, newName, () => OnChangeInfo(m_currentInfo, m_currentParent), !SceneUtils.IsAssetEditor);
+
+                        KwyttoDialog.ShowModal(new KwyttoDialog.BindProperties
+                        {
+                            message = Str.VS_CREATESKIN_MSGSUC,
+                            messageAlign = TextAnchor.MiddleCenter,
+                            messageTextSizeMultiplier = 2,
+                            buttons = new[]
+                            {
+                                KwyttoDialog.SpaceBtn,
+                                new KwyttoDialog.ButtonDefinition
+                                {
+                                    title = Str.VS_VIEWFILES,
+                                    onClick = () =>
+                                    {
+                                        Utils.OpenInFileBrowser(dir);
+                                        return false;
+                                    }
+                                },
+                                new KwyttoDialog.ButtonDefinition
+                                {
+                                    title = Locale.Get("EXCEPTION_OK"),
+                                    onClick = () =>true,
+                                    style = KwyttoDialog.ButtonStyle.White
+                                }
+                            }
+
+                        });
+                    }
+                }
+                if (GUILayout.Button(Locale.Get("CANCEL")))
+                {
+                    m_currentScreenState = State.Normal;
+                }
+
+            }
+
+        }
+
+        private void DrawNormal(Rect rect, VehicleInfo currentInfo, int currentInfoIndex)
+        {
             if (m_currentSkinsMaterials.Length == 0)
             {
                 using (new GUILayout.HorizontalScope())
@@ -49,7 +134,8 @@ namespace VehicleSkins.UI
                     GUILayout.Label(Str.VS_THEREARENOSKINS);
                     if (GUILayout.Button(Str.VS_CREATENEWSKIN))
                     {
-                        //CallCreateSkinPrompt();
+                        m_currentInputCreateValue = "";
+                        m_currentScreenState = State.AskingName;
                     }
                 }
                 if (GUILayout.Button(Str.VS_RELOADASSETSKINS))
@@ -63,18 +149,19 @@ namespace VehicleSkins.UI
                 bool isAssetEditor = SceneUtils.IsAssetEditor;
                 if (!isAssetEditor)
                 {
-                    GUILayout.Label(Locale.Get(isLocalConfig ? "K45_VS_USINGSAVEGAMECONFIG" : "K45_VS_USINGSHAREDCONFIG"));
+                    GUILayout.Label((isLocalConfig ? Str.VS_USINGSAVEGAMECONFIG : Str.VS_USINGSHAREDCONFIG));
                 }
                 else
                 {
-                    GUILayout.Label(Locale.Get(isLocalConfig ? "K45_VS_DEFAULTSNOTSAVED" : "K45_VS_DEFAULTSSAVED"));
+                    GUILayout.Label((isLocalConfig ? Str.VS_DEFAULTSNOTSAVED : Str.VS_DEFAULTSSAVED));
                 }
 
                 using (new GUILayout.HorizontalScope())
                 {
                     if (GUILayout.Button(Str.VS_CREATENEWSKIN))
                     {
-                        //CallCreateSkinPrompt();
+                        m_currentInputCreateValue = "";
+                        m_currentScreenState = State.AskingName;
                     }
                     if (GUILayout.Button(Str.VS_RELOADASSETSKINS))
                     {
@@ -85,11 +172,11 @@ namespace VehicleSkins.UI
                 {
                     using (new GUILayout.HorizontalScope())
                     {
-                        if (isLocalConfig && GUILayout.Button(Locale.Get(isAssetEditor ? "K45_VS_SAVESKINENABLESELECTION" : "K45_VS_EXPORTASSHARED")))
+                        if (isLocalConfig && GUILayout.Button((isAssetEditor ? Str.VS_SAVESKINENABLESELECTION : Str.VS_EXPORTASSHARED)))
                         {
                             DoExportShared();
                         }
-                        if (isLocalConfig && GUILayout.Button(Locale.Get(isAssetEditor ? "K45_VS_DISCARDCHANGES" : "K45_VS_DISCARDSAVEGAME")))
+                        if (isLocalConfig && GUILayout.Button(isAssetEditor ? Str.VS_DISCARDCHANGES : Str.VS_DISCARDSAVEGAME))
                         {
                             DiscardLocal();
                         }
@@ -105,7 +192,7 @@ namespace VehicleSkins.UI
                         }
                     }
                 }
-
+                GUIKwyttoCommons.AddComboBox(rect.width, Str.vs_forceSkinInCurrentSelectedVehicle, ref m_forcedSkinId, m_currentSkinsMaterialsNames, m_root, true);
                 using (var scroll = new GUILayout.ScrollViewScope(m_scrollSkins))
                 {
                     if (!isAssetEditor)
@@ -205,49 +292,6 @@ namespace VehicleSkins.UI
                 }
             });
         }
-
-        //private void CallCreateSkinPrompt(string errorMsg = "")
-        //    => KwyttoDialog.ShowModalPromptText(new KwyttoDialog.BindProperties
-        //    {
-        //        showButton1 = true,
-        //        showButton2 = true,
-        //        textButton1 = Locale.Get("CREATE"),
-        //        textButton2 = Locale.Get("CANCEL"),
-        //        message = (errorMsg + "\n" + Str.VS_CREATESKIN_MESSAGE).Trim()
-        //    }, OnCreateModalEnded);
-
-        //private bool OnCreateModalEnded(int exitCode, string newName)
-        //{
-        //    if (exitCode == 1)
-        //    {
-        //        newName = newName.TrimToNull();
-        //        if (newName.IsNullOrWhiteSpace() || m_currentSkinsMaterials.Any(x => x.skinName == newName))
-        //        {
-        //            CallCreateSkinPrompt(Str.VS_CREATESKIN_ERROR_ALREADYEXISTS);
-        //            return true;
-        //        }
-        //        var dir = SkinsSingleton.instance.CreateSkin(m_currentInfo, newName, () => OnChangeInfo(m_currentInfo, m_currentParent), !SceneUtils.IsAssetEditor);
-
-        //        KwyttoDialog.ShowModal(new KwyttoDialog.BindProperties
-        //        {
-        //            message = Str.VS_CREATESKIN_MSGSUC,
-        //            textButton1 = Locale.Get("EXCEPTION_OK"),
-        //            textButton2 = Str.VS_VIEWFILES,
-        //            showButton1 = true,
-        //            showButton2 = true
-        //        }, (x) =>
-        //        {
-        //            switch (x)
-        //            {
-        //                case 2:
-        //                    Utils.OpenInFileBrowser(dir);
-        //                    return false;
-        //            }
-        //            return true;
-        //        });
-        //    }
-        //    return true;
-        //}
 
         private void OnChangeInfo(VehicleInfo currentInfo, VehicleInfo parentInfo) => OnChangeInfo(currentInfo, parentInfo, m_trailersCount);
 

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Reflection;
 using UnityEngine;
 using VehicleSkins.Localization;
+using VehicleSkins.Singleton;
 using VehicleSkins.UI;
 
 [assembly: AssemblyVersion("0.0.0.*")]
@@ -33,5 +34,10 @@ namespace VehicleSkins
                 windowGetter: ()=>VSBaseLiteUI.Instance
              )
         });
+        protected override void OnLevelLoadingInternal()
+        {
+            base.OnLevelLoadingInternal();
+            SkinsSingleton.instance.ReloadSkins();
+        }
     }
 }

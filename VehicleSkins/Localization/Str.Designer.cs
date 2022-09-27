@@ -88,7 +88,7 @@ namespace VehicleSkins.Localization {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a &lt;color yellow&gt;There&apos;s already a skin with this name!&lt;/color&gt;.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a &lt;color=yellow&gt;There&apos;s already a skin with this name!&lt;/color&gt;.
         /// </summary>
         internal static string VS_CREATESKIN_ERROR_ALREADYEXISTS {
             get {
@@ -106,14 +106,48 @@ namespace VehicleSkins.Localization {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a 
-        ///      Skin files created!
-        ///      See files in the folder, edit them and reload in game to see the changes_
-        ///    .
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Skin files created!
+        ///See files in the folder, edit them and reload in game to see the changes   .
         /// </summary>
         internal static string VS_CREATESKIN_MSGSUC {
             get {
                 return ResourceManager.GetString("VS_CREATESKIN_MSGSUC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a &lt;color=red&gt;Skins enabled by default selection is not saved!&lt;/color&gt;.
+        /// </summary>
+        internal static string VS_DEFAULTSNOTSAVED {
+            get {
+                return ResourceManager.GetString("VS_DEFAULTSNOTSAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Skins enabled by default are up to date with the file.
+        /// </summary>
+        internal static string VS_DEFAULTSSAVED {
+            get {
+                return ResourceManager.GetString("VS_DEFAULTSSAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Discard changes.
+        /// </summary>
+        internal static string VS_DISCARDCHANGES {
+            get {
+                return ResourceManager.GetString("VS_DISCARDCHANGES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Discard and use shared.
+        /// </summary>
+        internal static string VS_DISCARDSAVEGAME {
+            get {
+                return ResourceManager.GetString("VS_DISCARDSAVEGAME", resourceCulture);
             }
         }
         
@@ -127,10 +161,17 @@ namespace VehicleSkins.Localization {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a 
-        ///      Do you want to erase all skins already exported to workshop?
-        ///      Note the ones with the same name will be overwritten anyway_
-        ///    .
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Export current to shared.
+        /// </summary>
+        internal static string VS_EXPORTASSHARED {
+            get {
+                return ResourceManager.GetString("VS_EXPORTASSHARED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Do you want to erase all skins already exported to workshop?
+        ///Note the ones with the same name will be overwritten anyway   .
         /// </summary>
         internal static string VS_EXPORTTOASSET_MSG {
             get {
@@ -153,6 +194,15 @@ namespace VehicleSkins.Localization {
         internal static string VS_EXPORTTOASSET_TITLE {
             get {
                 return ResourceManager.GetString("VS_EXPORTTOASSET_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Force skin in current selected vehicle.
+        /// </summary>
+        internal static string vs_forceSkinInCurrentSelectedVehicle {
+            get {
+                return ResourceManager.GetString("vs_forceSkinInCurrentSelectedVehicle", resourceCulture);
             }
         }
         
@@ -184,6 +234,15 @@ namespace VehicleSkins.Localization {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Save skins enabled by default.
+        /// </summary>
+        internal static string VS_SAVESKINENABLESELECTION {
+            get {
+                return ResourceManager.GetString("VS_SAVESKINENABLESELECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Skin source legend: &lt;color=gray&gt;Original skin&lt;/color&gt; &lt;color=green&gt;Workshop/Staging&lt;/color&gt; &lt;color=yellow&gt;Shared Folder&lt;/color&gt;.
         /// </summary>
         internal static string VS_SOURCECOLOR_LEGEND {
@@ -198,6 +257,24 @@ namespace VehicleSkins.Localization {
         internal static string VS_THEREARENOSKINS {
             get {
                 return ResourceManager.GetString("VS_THEREARENOSKINS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Using savegame config.
+        /// </summary>
+        internal static string VS_USINGSAVEGAMECONFIG {
+            get {
+                return ResourceManager.GetString("VS_USINGSAVEGAMECONFIG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Using shared config.
+        /// </summary>
+        internal static string VS_USINGSHAREDCONFIG {
+            get {
+                return ResourceManager.GetString("VS_USINGSHAREDCONFIG", resourceCulture);
             }
         }
         

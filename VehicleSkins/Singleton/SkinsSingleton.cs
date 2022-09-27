@@ -88,7 +88,7 @@ namespace VehicleSkins.Singleton
         //public const string MAIN_LOD_FILESUFFIX = "dLod.png";
         //public const string XYS_LOD_FILESUFFIX = "xysLod.png";
         //public const string ACI_LOD_FILESUFFIX = "aciLod.png";
-        public const string WTS_FILESUFFIX = "WTSLayout.xml";
+        public const string WE_FILESUFFIX = "WELayout.xml";
 
         public const string EXCLUDED_SKINS_FILENAME = "_ExcludedSkins.txt";
         public const string EXCLUDED_DEFAULT_SKIN_STRING = "<\\DEFAULT/>";
@@ -291,7 +291,7 @@ namespace VehicleSkins.Singleton
                     {
                         switch (subFile.Third)
                         {
-                            case WTS_FILESUFFIX:
+                            case WE_FILESUFFIX:
                                 wtsLayoutId = -1;//ModInstance.Controller.ConnectorWTS.RegisterWTSLayout(File.ReadAllText(filePath));
                                 break;
                         }
@@ -408,6 +408,13 @@ namespace VehicleSkins.Singleton
             material = null;
             if (m_skins.TryGetValue(info.name, out var skinData))
             {
+                if (VSBaseLiteUI.Instance.Visible
+                    //&& VSBaseLiteUI.LockSelection 
+                    && VSBaseLiteUI.GrabbedIsParked == isParked
+                    && VSBaseLiteUI.GrabbedId == vehicleId)
+                {
+                    return VSBaseLiteUI.Instance.GrabbedTargetSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);
+                }
                 if (isParked)
                 {
                     if (!m_cachedSkins.TryGetValue(targetIdx, out var skinName) || (!skinData.TryGetValue(skinName, out material)))
@@ -484,7 +491,7 @@ namespace VehicleSkins.Singleton
             //MAIN_LOD_FILESUFFIX,
             //XYS_LOD_FILESUFFIX,
             //ACI_LOD_FILESUFFIX,
-            WTS_FILESUFFIX
+            WE_FILESUFFIX
         };
 
     }

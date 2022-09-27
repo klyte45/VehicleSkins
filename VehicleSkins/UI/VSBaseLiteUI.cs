@@ -14,6 +14,9 @@ namespace VehicleSkins.UI
     internal class VSBaseLiteUI : GUIRootWindowBase
     {
         public static VSBaseLiteUI Instance { get; private set; }
+        public static ushort GrabbedId { get; private set; }
+        public static bool GrabbedIsParked { get; private set; }
+        public string GrabbedTargetSkin => m_detailUI.ForcedSkinOnSelected;
 
         private VSInfoDetailLiteUI m_detailUI;
         public GUIColorPicker m_colorPicker;
@@ -129,7 +132,7 @@ namespace VehicleSkins.UI
             Init($"{ModInstance.Instance.SimpleName} v{ModInstance.FullVersion}", new Rect(128, 128, 680, 420), resizable: true, minSize: new Vector2(340, 260));
             Instance = this;
             m_modelFilter = new GUIFilterItemsScreen<State>(Str.VS_MODELSELECT, ModInstance.Controller, OnFilterParam, OnVehicleSet, GoTo, State.Normal, State.SelectVehicle, otherFilters: DrawExtraFilter, extraButtonsSearch: ExtraButtonsSearch);
-            m_colorPicker = GameObjectUtils.CreateElement<GUIColorPicker>(transform);
+            m_colorPicker = GameObjectUtils.CreateElement<GUIColorPicker>(transform).Init();
             m_colorPicker.Visible = false;
             m_detailUI = new VSInfoDetailLiteUI(this);
         }
@@ -147,12 +150,20 @@ namespace VehicleSkins.UI
                     var head = VehicleManager.instance.m_vehicles.m_buffer[x].GetFirstVehicle(x);
                     CurrentInfo = VehicleManager.instance.m_vehicles.m_buffer[head].Info;
                     m_currentState = State.Normal;
+                    GrabbedId = x;
+                    GrabbedIsParked = false;
                 };
                 tool.OnParkedVehicleSelect += (x) =>
                 {
                     CurrentInfo = VehicleManager.instance.m_parkedVehicles.m_buffer[x].Info;
                     m_currentState = State.Normal;
+
+                    GrabbedId = x;
+                    GrabbedIsParked = true;
                 };
+
+                GrabbedId = 0;
+                GrabbedIsParked = false;
                 ToolsModifierControl.SetTool<VehicleSkinsTool>();
             }
             return 0;
