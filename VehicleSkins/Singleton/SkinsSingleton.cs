@@ -15,9 +15,9 @@ namespace VehicleSkins.Singleton
 {
     public class SkinsSingleton : Singleton<SkinsSingleton>
     {
-        internal class MaterialContainer
+        public class MaterialContainer
         {
-            internal enum Source
+            public enum Source
             {
                 ORIGINAL,
                 WORKSHOP,
@@ -147,8 +147,8 @@ namespace VehicleSkins.Singleton
 
         internal bool HasSkins(VehicleInfo info) => m_skins.TryGetValue(info.name, out var skins) && skins.Count > 1;
 
-        public string GetDirectoryForAssetShared(PrefabInfo info) => Path.Combine(MainController.SKINS_FOLDER, info.name);
-        public string GetDirectoryForAssetOwn(PrefabInfo info) => KFileUtils.GetRootFolderForK45(info) is string str ? Path.Combine(Path.Combine(str, MainController.EXTRA_SPRITES_FILES_FOLDER_ASSETS), PrefabUtils.GetAssetFromPrefab(info).name) : null;
+        public string GetDirectoryForAssetShared(PrefabInfo info) => Path.Combine(VSMainController.SKINS_FOLDER, info.name);
+        public string GetDirectoryForAssetOwn(PrefabInfo info) => KFileUtils.GetRootFolderForK45(info) is string str ? Path.Combine(Path.Combine(str, VSMainController.EXTRA_SPRITES_FILES_FOLDER_ASSETS), PrefabUtils.GetAssetFromPrefab(info).name) : null;
 
         public void ReloadSkins()
         {
@@ -164,7 +164,7 @@ namespace VehicleSkins.Singleton
             m_skins.Clear();
             m_cachedSkins.Clear();
             //  ModInstance.Controller.ConnectorWTS.ClearWTSLayoutRegisters();
-            var models = Directory.GetDirectories(MainController.SKINS_FOLDER);
+            var models = Directory.GetDirectories(VSMainController.SKINS_FOLDER);
             foreach (var vehicleInfo in VehiclesIndexes.instance.PrefabsData.Values)
             {
                 if (vehicleInfo.Info is VehicleInfo vi)
@@ -402,7 +402,7 @@ namespace VehicleSkins.Singleton
             return !(material is null);
         }
 
-        internal bool GetSkin(VehicleInfo info, ushort vehicleId, bool isParked, out MaterialContainer material)
+        public bool GetSkin(VehicleInfo info, ushort vehicleId, bool isParked, out MaterialContainer material)
         {
             var targetIdx = vehicleId | (isParked ? 0x80000000u : 0);
             material = null;
@@ -475,7 +475,7 @@ namespace VehicleSkins.Singleton
             return !m_cachedSkins[targetIdx].IsNullOrWhiteSpace();
         }
 
-        internal bool GetSkin(VehicleInfo info, string skinName, out MaterialContainer material)
+        public bool GetSkin(VehicleInfo info, string skinName, out MaterialContainer material)
         {
             material = null;
             return m_skins.TryGetValue(info.name, out var skinData) ? skinData.TryGetValue(skinName, out material) : false;

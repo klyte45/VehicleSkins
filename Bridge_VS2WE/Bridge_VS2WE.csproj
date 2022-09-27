@@ -4,12 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{27C920F8-F40F-4D56-BCB6-9C9025ED0A0C}</ProjectGuid>
+    <ProjectGuid>{DC342648-D5BD-446C-991C-7707B63AEFE3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>
-    </RootNamespace>
-    <AssemblyName>KwyttoUtilityVS</AssemblyName>
+    <RootNamespace>Bridge_VS2WE</RootNamespace>
+    <AssemblyName>Bridge_VS2WE</AssemblyName> 
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,20 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CitiesHarmony.API, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CitiesHarmony.API.2.1.0\lib\net35\CitiesHarmony.API.dll</HintPath>
-    </Reference>
-    <Reference Include="CitiesHarmony.Harmony, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CitiesHarmony.Harmony.2.2.0\lib\net35\CitiesHarmony.Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="UnifiedUILib">
-      <HintPath>..\libs\UnifiedUILib.dll</HintPath>
-      <Aliases>UUI</Aliases>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\_managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\_managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -54,11 +40,10 @@
       <HintPath>..\..\_managed\ColossalManaged.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ICities">
-      <HintPath>..\..\_managed\ICities.dll</HintPath>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\_managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -66,26 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs" Exclude="Kwytto\Localization\KStr.Designer.cs" />
-    <Compile Include="Kwytto\Localization\KStr.Designer.cs">
-      <DependentUpon>KStr.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <Compile Include="**/*.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Kwytto\Localization\KStr.*.resx" />
-    <EmbeddedResource Include="Kwytto\Localization\KStr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>KStr.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Kwytto\UI\Images\*.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\KwyttoUtilityVS\KwyttoUtilityVS.csproj">
+      <Project>{27c920f8-f40f-4d56-bcb6-9c9025ed0a0c}</Project>
+      <Name>KwyttoUtilityVS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-  </PropertyGroup>
 </Project>

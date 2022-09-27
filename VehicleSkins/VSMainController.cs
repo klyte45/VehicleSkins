@@ -1,3 +1,4 @@
+using Bridge_VS2WE;
 using ColossalFramework.UI;
 using Kwytto.Interfaces;
 using Kwytto.Utils;
@@ -8,7 +9,7 @@ using VehicleSkins.UI;
 
 namespace VehicleSkins
 {
-    public class MainController : BaseController<ModInstance, MainController>
+    public class VSMainController : BaseController<ModInstance, VSMainController>
     {
 
         public const string EXTRA_SPRITES_FILES_FOLDER_ASSETS = "K45_VS_Skins";
@@ -16,8 +17,7 @@ namespace VehicleSkins
         public static readonly string SKINS_FOLDER = Path.Combine(FOLDER_NAME, "Skins");
 
         public static SkinsSingleton Skins => SkinsSingleton.instance;
-
-        //  internal IBridgeWTS ConnectorWTS { get; private set; }
+        public IBridge ConnectorWE { get; } = BridgeUtils.GetMostPrioritaryImplementation<IBridge>();
 
         public void Awake()
         {

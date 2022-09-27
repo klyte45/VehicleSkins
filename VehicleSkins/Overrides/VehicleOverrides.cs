@@ -60,7 +60,7 @@ namespace VehicleSkins.Overrides
         private static float targetHeight;
         public static void AfterUpdateTransformOverride(CameraController __instance)
         {
-            if (LoadingManager.instance.m_loadingComplete && SimulationManager.instance.m_currentTickIndex - lastFrameOverride > 24)
+            if (ModInstance.Controller.ConnectorWE.IsAnyEditorOpen || LoadingManager.instance.m_loadingComplete && SimulationManager.instance.m_currentTickIndex - lastFrameOverride > 24)
             {
                 return;
             }
@@ -114,4 +114,7 @@ namespace VehicleSkins.Overrides
 
         }
     }
+}
+namespace VehicleSkins.ModShared
+{
 }

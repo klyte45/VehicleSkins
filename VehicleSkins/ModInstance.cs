@@ -10,7 +10,7 @@ using VehicleSkins.UI;
 [assembly: AssemblyVersion("0.0.0.*")]
 namespace VehicleSkins
 {
-    public class ModInstance : BasicIUserMod<ModInstance, MainController>
+    public class ModInstance : BasicIUserMod<ModInstance, VSMainController>
     {
         public override string SimpleName => "Vehicle Skins";
 
