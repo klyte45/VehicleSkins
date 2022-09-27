@@ -16,6 +16,11 @@ namespace K45_VS2WE
 
         public override int Priority { get; } = 0;
 
+        public override bool IsBridgeEnabled => PluginUtils.VerifyModsEnabled(new Dictionary<ulong, string> { }, new List<string>
+        {
+          typeof(WEFacade).Assembly.GetName().Name
+        }).Count > 0;
+
         public override bool IsWEVehicleEditorOpen => WEFacade.IsWEVehicleEditorOpen;
         public override bool IsAnyEditorOpen => WEFacade.IsAnyEditorOpen;
 

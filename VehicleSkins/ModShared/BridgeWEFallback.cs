@@ -7,6 +7,7 @@ namespace VehicleSkins.ModShared
         public override bool WEAvailable { get; } = false;
 
         public override int Priority { get; } = 1000;
+        public override bool IsBridgeEnabled { get; } = true;
 
         public override bool IsWEVehicleEditorOpen { get; } = false;
 
