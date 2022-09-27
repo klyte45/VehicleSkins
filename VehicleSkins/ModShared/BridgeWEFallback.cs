@@ -12,7 +12,11 @@ namespace VehicleSkins.ModShared
 
         public override bool IsAnyEditorOpen { get; } = false;
 
-        public override void ClearWTSLayoutRegisters() { }
+        public override string currentSelectionSkin { get; } = null;
+
+        public override ushort currentFocusVehicle { get; } = 0;
+
+        public override void ClearWELayoutRegisters() { }
 
         public override bool GetSkinDescriptorByName<T>(VehicleInfo vehicle, string skinName, out T layout)
         {
@@ -25,7 +29,7 @@ namespace VehicleSkins.ModShared
             layout = null;
             return false;
         }
-        public override int RegisterWTSLayout(string fileContent) => -1;
+        public override int RegisterWELayout(string fileContent) => -1;
         public override void ApplyLayout(VehicleInfo info, string skin, string contents) { }
 
     }

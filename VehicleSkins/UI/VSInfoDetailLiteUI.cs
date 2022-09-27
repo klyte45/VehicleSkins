@@ -28,7 +28,7 @@ namespace VehicleSkins.UI
         private State m_currentScreenState = State.Normal;
         private int m_forcedSkinId;
 
-        public string ForcedSkinOnSelected => m_forcedSkinId < m_currentSkinsMaterialsNames.Length && m_forcedSkinId > 0 ? m_currentSkinsMaterialsNames[m_forcedSkinId].TrimToNull() ?? "<DEFAULT>" : null;
+        public string ForcedSkinOnSelected => m_forcedSkinId < (m_currentSkinsMaterialsNames?.Length ?? 0) && m_forcedSkinId > 0 ? m_currentSkinsMaterialsNames?[m_forcedSkinId].TrimToNull() ?? "<DEFAULT>" : null;
 
         private enum State
         {

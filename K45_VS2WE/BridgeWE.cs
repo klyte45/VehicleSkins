@@ -20,11 +20,14 @@ namespace K45_VS2WE
         public override bool IsAnyEditorOpen => WEFacade.IsAnyEditorOpen;
 
         private readonly List<LayoutDescriptorVehicleXml> m_skinLayouts = new List<LayoutDescriptorVehicleXml>();
+        public override string currentSelectionSkin => WEFacade.CurrentSelectedSkin;
 
-        public override void ClearWTSLayoutRegisters() => m_skinLayouts.Clear();
+        public override ushort currentFocusVehicle => WEFacade.CurrentGrabbedVehicleId;
+
+        public override void ClearWELayoutRegisters() => m_skinLayouts.Clear();
         public override bool GetSkinDescriptorForVehicle<T>(VehicleInfo vehicle, ushort vehicleId, bool isParked, out T layout)
         {
-            if (typeof(T) == typeof(LayoutDescriptorVehicleXml) && SkinsSingleton.instance.GetSkin(vehicle, vehicleId, isParked, out var skin))
+            if (SkinsSingleton.instance.GetSkin(vehicle, vehicleId, isParked, out var skin))
             {
                 layout = skin.wtsLayoutId < 0 ? null : m_skinLayouts[skin.wtsLayoutId] as T;
                 return true;
@@ -33,7 +36,7 @@ namespace K45_VS2WE
             return false;
         }
 
-        public override int RegisterWTSLayout(string fileContent)
+        public override int RegisterWELayout(string fileContent)
         {
             var data = XmlUtils.DefaultXmlDeserialize<LayoutDescriptorVehicleXml>(fileContent);
             if (!data.IsValid())
@@ -48,7 +51,7 @@ namespace K45_VS2WE
         {
             if (SkinsSingleton.instance.GetSkin(info, skin, out var material))
             {
-                var newId = RegisterWTSLayout(contents);
+                var newId = RegisterWELayout(contents);
                 if (newId != -1)
                 {
                     material.wtsLayoutId = newId;
@@ -60,7 +63,7 @@ namespace K45_VS2WE
 
         public override bool GetSkinDescriptorByName<T>(VehicleInfo vehicle, string skinName, out T layout)
         {
-            if (typeof(T) == typeof(LayoutDescriptorVehicleXml) && SkinsSingleton.instance.GetSkin(vehicle, skinName, out var skin))
+            if (SkinsSingleton.instance.GetSkin(vehicle, skinName, out var skin))
             {
                 layout = skin.wtsLayoutId < 0 ? null : m_skinLayouts[skin.wtsLayoutId] as T;
                 return !(layout is null);

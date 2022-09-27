@@ -292,7 +292,7 @@ namespace VehicleSkins.Singleton
                         switch (subFile.Third)
                         {
                             case WE_FILESUFFIX:
-                                wtsLayoutId = -1;//ModInstance.Controller.ConnectorWTS.RegisterWTSLayout(File.ReadAllText(filePath));
+                                wtsLayoutId = ModInstance.Controller.ConnectorWE.RegisterWELayout(File.ReadAllText(filePath));
                                 break;
                         }
                     }
@@ -408,10 +408,16 @@ namespace VehicleSkins.Singleton
             material = null;
             if (m_skins.TryGetValue(info.name, out var skinData))
             {
+                if (ModInstance.Controller.ConnectorWE.IsWEVehicleEditorOpen
+                    && ModInstance.Controller.ConnectorWE.currentFocusVehicle == vehicleId
+                    && !VSBaseLiteUI.GrabbedIsParked)
+                {
+                    return ModInstance.Controller.ConnectorWE.currentSelectionSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);
+                }
                 if (VSBaseLiteUI.Instance.Visible
-                    //&& VSBaseLiteUI.LockSelection 
-                    && VSBaseLiteUI.GrabbedIsParked == isParked
-                    && VSBaseLiteUI.GrabbedId == vehicleId)
+                //&& VSBaseLiteUI.LockSelection 
+                && VSBaseLiteUI.GrabbedIsParked == isParked
+                && VSBaseLiteUI.GrabbedId == vehicleId)
                 {
                     return VSBaseLiteUI.Instance.GrabbedTargetSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);
                 }
