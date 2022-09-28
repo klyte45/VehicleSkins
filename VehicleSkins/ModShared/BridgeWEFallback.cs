@@ -2,7 +2,7 @@
 
 namespace VehicleSkins.ModShared
 {
-    internal class BridgeWEFallback : IBridge
+    public class BridgeWEFallback : IBridge
     {
         public override bool WEAvailable { get; } = false;
 
