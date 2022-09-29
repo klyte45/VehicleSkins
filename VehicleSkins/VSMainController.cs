@@ -22,7 +22,6 @@ namespace VehicleSkins
         public void Awake()
         {
             ToolsModifierControl.toolController.AddExtraToolToController<VehicleSkinsTool>();
-            //ConnectorWTS = PluginUtils.GetImplementationTypeForMod<BridgeWTSFallback, IBridgeWTS>(gameObject, "KlyteWriteTheSigns", "0.5.0.0", "Klyte.VehicleSkins.ModShared.BridgeWTS");
         }
         protected override void StartActions()
         {

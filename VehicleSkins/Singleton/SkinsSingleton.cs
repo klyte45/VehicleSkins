@@ -163,7 +163,7 @@ namespace VehicleSkins.Singleton
         {
             m_skins.Clear();
             m_cachedSkins.Clear();
-            //  ModInstance.Controller.ConnectorWTS.ClearWTSLayoutRegisters();
+            ModInstance.Controller.ConnectorWE.ClearWELayoutRegisters();
             var models = Directory.GetDirectories(VSMainController.SKINS_FOLDER);
             foreach (var vehicleInfo in VehiclesIndexes.instance.PrefabsData.Values)
             {
