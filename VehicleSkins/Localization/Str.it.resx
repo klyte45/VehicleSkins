@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,5 +117,81 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
- 
+  <data name="root_modDescription" xml:space="preserve">
+    <value>Multiplies vehicles skins possibilities</value>
+  </data>
+  <data name="VS_MODELSELECT" xml:space="preserve">
+    <value>Select model</value>
+  </data>
+  <data name="VS_THEREARENOSKINS" xml:space="preserve">
+    <value>There are no skins loaded for this vehicle model</value>
+  </data>
+  <data name="VS_CREATENEWSKIN" xml:space="preserve">
+    <value>Create new skin</value>
+  </data>
+  <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">
+    <value>Type the new skin name:</value>
+  </data>
+  <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
+    <value>&lt;color=yellow&gt;There's already a skin with this name!&lt;/color&gt;</value>
+  </data>
+  <data name="VS_RELOADALLSKINS" xml:space="preserve">
+    <value>Reload all skins</value>
+  </data>
+  <data name="VS_RELOADASSETSKINS" xml:space="preserve">
+    <value>Reload all skins from current asset</value>
+  </data>
+  <data name="VS_ACTIVERULESONLY" xml:space="preserve">
+    <value>Filter assets having at least one skin</value>
+  </data>
+  <data name="VS_EXPORTTOASSET_TITLE" xml:space="preserve">
+    <value>Export shared skins to upload to Workshop</value>
+  </data>
+  <data name="VS_EXPORTTOASSET_MSG" xml:space="preserve">
+    <value>Do you want to erase all skins already exported to workshop?
+Note the ones with the same name will be overwritten anyway   </value>
+  </data>
+  <data name="VS_EXPORTASSET" xml:space="preserve">
+    <value>Export shared to workshop</value>
+  </data>
+  <data name="VS_EXPORTTOASSET_MSGSUC" xml:space="preserve">
+    <value>Files exported to be uploaded successfully!</value>
+  </data>
+  <data name="VS_VIEWFILES" xml:space="preserve">
+    <value>Open files folder</value>
+  </data>
+  <data name="VS_SOURCECOLOR_LEGEND" xml:space="preserve">
+    <value>Skin source legend: &lt;color=gray&gt;Original skin&lt;/color&gt; &lt;color=green&gt;Workshop/Staging&lt;/color&gt; &lt;color=yellow&gt;Shared Folder&lt;/color&gt;</value>
+  </data>
+  <data name="VS_CREATESKIN_MSGSUC" xml:space="preserve">
+    <value>Skin files created!
+See files in the folder, edit them and reload in game to see the changes   </value>
+  </data>
+  <data name="VS_USINGSAVEGAMECONFIG" xml:space="preserve">
+    <value>Using savegame config</value>
+  </data>
+  <data name="VS_USINGSHAREDCONFIG" xml:space="preserve">
+    <value>Using shared config</value>
+  </data>
+  <data name="VS_EXPORTASSHARED" xml:space="preserve">
+    <value>Export current to shared</value>
+  </data>
+  <data name="VS_DISCARDSAVEGAME" xml:space="preserve">
+    <value>Discard and use shared</value>
+  </data>
+  <data name="VS_DEFAULTSNOTSAVED" xml:space="preserve">
+    <value>&lt;color=red&gt;Skins enabled by default selection is not saved!&lt;/color&gt;</value>
+  </data>
+  <data name="VS_DEFAULTSSAVED" xml:space="preserve">
+    <value>Skins enabled by default are up to date with the file</value>
+  </data>
+  <data name="VS_SAVESKINENABLESELECTION" xml:space="preserve">
+    <value>Save skins enabled by default</value>
+  </data>
+  <data name="VS_DISCARDCHANGES" xml:space="preserve">
+    <value>Discard changes</value>
+  </data>
+  <data name="vs_forceSkinInCurrentSelectedVehicle" xml:space="preserve">
+    <value>Force skin in current selected vehicle</value>
+  </data>
 </root>
