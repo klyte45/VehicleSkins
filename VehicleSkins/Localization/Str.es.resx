@@ -118,80 +118,80 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="root_modDescription" xml:space="preserve">
-    <value>Multiplies vehicles skins possibilities</value>
+    <value>Multiplica las posibilidades de skins de vehículos</value>
   </data>
   <data name="VS_MODELSELECT" xml:space="preserve">
-    <value>Select model</value>
+    <value>Seleccionar modelo</value>
   </data>
   <data name="VS_THEREARENOSKINS" xml:space="preserve">
-    <value>There are no skins loaded for this vehicle model</value>
+    <value>No hay skins cargados para este modelo de vehículo</value>
   </data>
   <data name="VS_CREATENEWSKIN" xml:space="preserve">
-    <value>Create new skin</value>
+    <value>Crear nueva skin</value>
   </data>
   <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">
-    <value>Type the new skin name:</value>
+    <value>Escribe el nombre para la nueva Skin:</value>
   </data>
   <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
-    <value>&lt;color=yellow&gt;There's already a skin with this name!&lt;/color&gt;</value>
+    <value>&lt;color=yellow&gt;¡Ya hay una skin con este nombre!&lt;/color&gt;</value>
   </data>
   <data name="VS_RELOADALLSKINS" xml:space="preserve">
-    <value>Reload all skins</value>
+    <value>Recargar todos los skins</value>
   </data>
   <data name="VS_RELOADASSETSKINS" xml:space="preserve">
-    <value>Reload all skins from current asset</value>
+    <value>Recargar todos los skins del activo actual</value>
   </data>
   <data name="VS_ACTIVERULESONLY" xml:space="preserve">
-    <value>Filter assets having at least one skin</value>
+    <value>Filtrar activos con al menos un skin</value>
   </data>
   <data name="VS_EXPORTTOASSET_TITLE" xml:space="preserve">
-    <value>Export shared skins to upload to Workshop</value>
+    <value>Exportar skins para compartir en la Workshop</value>
   </data>
   <data name="VS_EXPORTTOASSET_MSG" xml:space="preserve">
-    <value>Do you want to erase all skins already exported to workshop?
-Note the ones with the same name will be overwritten anyway   </value>
+    <value>¿Desea borrar todos los skins ya exportados al taller?
+Tenga en cuenta que los que tengan el mismo nombre serán sobrescritos de todos modos   </value>
   </data>
   <data name="VS_EXPORTASSET" xml:space="preserve">
-    <value>Export shared to workshop</value>
+    <value>Exportar a la Workshop</value>
   </data>
   <data name="VS_EXPORTTOASSET_MSGSUC" xml:space="preserve">
-    <value>Files exported to be uploaded successfully!</value>
+    <value>Los archivos fueron exportados con éxito!</value>
   </data>
   <data name="VS_VIEWFILES" xml:space="preserve">
-    <value>Open files folder</value>
+    <value>Abrir carpeta de archivos</value>
   </data>
   <data name="VS_SOURCECOLOR_LEGEND" xml:space="preserve">
-    <value>Skin source legend: &lt;color=gray&gt;Original skin&lt;/color&gt; &lt;color=green&gt;Workshop/Staging&lt;/color&gt; &lt;color=yellow&gt;Shared Folder&lt;/color&gt;</value>
+    <value>Leyenda de origen de la skin: &lt;color=gray&gt;skin original&lt;/color&gt; &lt;color=green&gt;Workshop/Staging&lt;/color&gt; &lt;color=yellow&gt;Carpeta Compartida&lt;/color&gt;</value>
   </data>
   <data name="VS_CREATESKIN_MSGSUC" xml:space="preserve">
-    <value>Skin files created!
-See files in the folder, edit them and reload in game to see the changes   </value>
+    <value>¡Archivos de skins creados!
+Ver archivos en la carpeta, editarlos y recargar el juego para ver los cambios   </value>
   </data>
   <data name="VS_USINGSAVEGAMECONFIG" xml:space="preserve">
-    <value>Using savegame config</value>
+    <value>Usando configuración de guardado</value>
   </data>
   <data name="VS_USINGSHAREDCONFIG" xml:space="preserve">
-    <value>Using shared config</value>
+    <value>Usando configuración compartida</value>
   </data>
   <data name="VS_EXPORTASSHARED" xml:space="preserve">
-    <value>Export current to shared</value>
+    <value>Exportar actual a compartido</value>
   </data>
   <data name="VS_DISCARDSAVEGAME" xml:space="preserve">
-    <value>Discard and use shared</value>
+    <value>Descartar y usar compartido</value>
   </data>
   <data name="VS_DEFAULTSNOTSAVED" xml:space="preserve">
-    <value>&lt;color=red&gt;Skins enabled by default selection is not saved!&lt;/color&gt;</value>
+    <value>&lt;color=red&gt;No se han guardado los skins habilitados por defecto!&lt;/color&gt;</value>
   </data>
   <data name="VS_DEFAULTSSAVED" xml:space="preserve">
-    <value>Skins enabled by default are up to date with the file</value>
+    <value>Los skins habilitados por defecto están actualizados con el archivo</value>
   </data>
   <data name="VS_SAVESKINENABLESELECTION" xml:space="preserve">
-    <value>Save skins enabled by default</value>
+    <value>Guardar skins habilitados por defecto</value>
   </data>
   <data name="VS_DISCARDCHANGES" xml:space="preserve">
-    <value>Discard changes</value>
+    <value>Descartar cambios</value>
   </data>
   <data name="vs_forceSkinInCurrentSelectedVehicle" xml:space="preserve">
-    <value>Force skin in current selected vehicle</value>
+    <value>Forzar la skin del vehículo seleccionado</value>
   </data>
 </root>
