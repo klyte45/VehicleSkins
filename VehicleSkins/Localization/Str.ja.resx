@@ -118,38 +118,38 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="root_modDescription" xml:space="preserve">
-    <value>Multiplies vehicles skins possibilities</value>
+    <value>複数の車両スキンが追加や選択が可能です</value>
   </data>
   <data name="VS_MODELSELECT" xml:space="preserve">
-    <value>Select model</value>
+    <value>モデルを選択</value>
   </data>
   <data name="VS_THEREARENOSKINS" xml:space="preserve">
-    <value>There are no skins loaded for this vehicle model</value>
+    <value>この車両モデルにスキンがロードされていません</value>
   </data>
   <data name="VS_CREATENEWSKIN" xml:space="preserve">
-    <value>Create new skin</value>
+    <value>新しいスキンを作成</value>
   </data>
   <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">
-    <value>Type the new skin name:</value>
+    <value>新しいスキン名を入力:</value>
   </data>
   <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
-    <value>&lt;color=yellow&gt;There's already a skin with this name!&lt;/color&gt;</value>
+    <value>&lt;color=yellow&gt;既に同じスキン名があります！&lt;/color&gt;</value>
   </data>
   <data name="VS_RELOADALLSKINS" xml:space="preserve">
-    <value>Reload all skins</value>
+    <value>全てのスキンを再読み込み</value>
   </data>
   <data name="VS_RELOADASSETSKINS" xml:space="preserve">
-    <value>Reload all skins from current asset</value>
+    <value>現在のアセットから全てのスキンを再読み込み</value>
   </data>
   <data name="VS_ACTIVERULESONLY" xml:space="preserve">
-    <value>Filter assets having at least one skin</value>
+    <value>1つ以上のスキンを持つアセットをフィルター</value>
   </data>
   <data name="VS_EXPORTTOASSET_TITLE" xml:space="preserve">
-    <value>Export shared skins to upload to Workshop</value>
+    <value>共有されたスキンをエクスポートしてワークショップに公開</value>
   </data>
   <data name="VS_EXPORTTOASSET_MSG" xml:space="preserve">
-    <value>Do you want to erase all skins already exported to workshop?
-Note the ones with the same name will be overwritten anyway   </value>
+    <value>ワークショップ用で既にエクスポートした、スキンを全て消去しますか？
+同じスキン名は上書きされるので注意ください。   </value>
   </data>
   <data name="VS_EXPORTASSET" xml:space="preserve">
     <value>Export shared to workshop</value>
