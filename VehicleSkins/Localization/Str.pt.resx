@@ -130,7 +130,7 @@
     <value>Criar nova skin</value>
   </data>
   <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">
-    <value>Digite o nome ds nova skin:</value>
+    <value>Digite o nome da nova skin:</value>
   </data>
   <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
     <value>&lt;color=yellow&gt;Já existe uma skin com este nome!&lt;/color&gt;</value>
@@ -148,7 +148,7 @@
     <value>Exportar skins compartilhadas para fazer upload para a Oficina</value>
   </data>
   <data name="VS_EXPORTTOASSET_MSG" xml:space="preserve">
-    <value>Você quer apagar todas as skins já exportadas para workshop?
+    <value>Você quer apagar todas as skins já exportadas para a Oficina?
 Note que aquelas com o mesmo nome serão substituídas mesmo assim   </value>
   </data>
   <data name="VS_EXPORTASSET" xml:space="preserve">
