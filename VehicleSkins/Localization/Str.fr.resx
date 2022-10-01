@@ -155,7 +155,7 @@ Notez que ceux portant le même nom seront remplacés   </value>
     <value>Exporter vers le Workshop</value>
   </data>
   <data name="VS_EXPORTTOASSET_MSGSUC" xml:space="preserve">
-    <value>Files exported to be uploaded successfully!</value>
+    <value>Fichiers exportés pour être téléchargés avec succès !</value>
   </data>
   <data name="VS_VIEWFILES" xml:space="preserve">
     <value>Ouvrir le dossier de fichiers</value>
@@ -177,21 +177,21 @@ Vous pouvez voir les fichiers dans le dossier, les modifier et les recharger dan
     <value>Exporter le courant pour être partagé</value>
   </data>
   <data name="VS_DISCARDSAVEGAME" xml:space="preserve">
-    <value>Discard and use shared</value>
+    <value>Ignorer et utiliser le skin partagé</value>
   </data>
   <data name="VS_DEFAULTSNOTSAVED" xml:space="preserve">
-    <value>&lt;color=red&gt;Skins enabled by default selection is not saved!&lt;/color&gt;</value>
+    <value>&lt;color=red&gt;Les skins activés par défaut ne sont pas sauvegardés !&lt;/color&gt;</value>
   </data>
   <data name="VS_DEFAULTSSAVED" xml:space="preserve">
-    <value>Skins enabled by default are up to date with the file</value>
+    <value>Les skins activés par défaut sont à jour avec le fichier</value>
   </data>
   <data name="VS_SAVESKINENABLESELECTION" xml:space="preserve">
-    <value>Save skins enabled by default</value>
+    <value>Sauvegarder les skins activés par défaut</value>
   </data>
   <data name="VS_DISCARDCHANGES" xml:space="preserve">
-    <value>Discard changes</value>
+    <value>Annuler les modifications</value>
   </data>
   <data name="vs_forceSkinInCurrentSelectedVehicle" xml:space="preserve">
-    <value>Force skin in current selected vehicle</value>
+    <value>Forcer le skin dans le véhicule sélectionné</value>
   </data>
 </root>
