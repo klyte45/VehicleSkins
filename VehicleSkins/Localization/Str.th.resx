@@ -121,22 +121,22 @@
     <value>Multiplies vehicles skins possibilities</value>
   </data>
   <data name="VS_MODELSELECT" xml:space="preserve">
-    <value>Select model</value>
+    <value>เลือกโมเดล</value>
   </data>
   <data name="VS_THEREARENOSKINS" xml:space="preserve">
     <value>There are no skins loaded for this vehicle model</value>
   </data>
   <data name="VS_CREATENEWSKIN" xml:space="preserve">
-    <value>Create new skin</value>
+    <value>สร้างสกินใหม่</value>
   </data>
   <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">
-    <value>Type the new skin name:</value>
+    <value>พิมพ์ชื่อสกินใหม่:</value>
   </data>
   <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
     <value>&lt;color=yellow&gt;There's already a skin with this name!&lt;/color&gt;</value>
   </data>
   <data name="VS_RELOADALLSKINS" xml:space="preserve">
-    <value>Reload all skins</value>
+    <value>โหลดสกินใหม่ทั้งหมด</value>
   </data>
   <data name="VS_RELOADASSETSKINS" xml:space="preserve">
     <value>Reload all skins from current asset</value>
@@ -189,7 +189,7 @@ See files in the folder, edit them and reload in game to see the changes   </val
     <value>Save skins enabled by default</value>
   </data>
   <data name="VS_DISCARDCHANGES" xml:space="preserve">
-    <value>Discard changes</value>
+    <value>ยกเลิกการเปลี่ยนแปลง</value>
   </data>
   <data name="vs_forceSkinInCurrentSelectedVehicle" xml:space="preserve">
     <value>Force skin in current selected vehicle</value>
