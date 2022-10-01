@@ -124,7 +124,7 @@
     <value>เลือกโมเดล</value>
   </data>
   <data name="VS_THEREARENOSKINS" xml:space="preserve">
-    <value>There are no skins loaded for this vehicle model</value>
+    <value>ไม่มีสกินใดๆ ถูกโหลดสำหรับโมเดลยานพาหนะนี้</value>
   </data>
   <data name="VS_CREATENEWSKIN" xml:space="preserve">
     <value>สร้างสกินใหม่</value>
@@ -139,7 +139,7 @@
     <value>โหลดสกินใหม่ทั้งหมด</value>
   </data>
   <data name="VS_RELOADASSETSKINS" xml:space="preserve">
-    <value>Reload all skins from current asset</value>
+    <value>โหลดสกินใหม่ทั้งหมดจาก Asset ปัจจุบัน</value>
   </data>
   <data name="VS_ACTIVERULESONLY" xml:space="preserve">
     <value>Filter assets having at least one skin</value>
@@ -148,8 +148,8 @@
     <value>Export shared skins to upload to Workshop</value>
   </data>
   <data name="VS_EXPORTTOASSET_MSG" xml:space="preserve">
-    <value>Do you want to erase all skins already exported to workshop?
-Note the ones with the same name will be overwritten anyway   </value>
+    <value>คุณต้องการลบสกินทั้งหมดที่ได้ส่งออกไปยังเวิร์คชอปแล้วหรือไม่?
+โปรดทราบว่าถ้าชื่อที่ตั้งไว้เป็นชื่อเดียวกัน ก็จะมีการเขียนทับต่อไป</value>
   </data>
   <data name="VS_EXPORTASSET" xml:space="preserve">
     <value>Export shared to workshop</value>
@@ -158,7 +158,7 @@ Note the ones with the same name will be overwritten anyway   </value>
     <value>Files exported to be uploaded successfully!</value>
   </data>
   <data name="VS_VIEWFILES" xml:space="preserve">
-    <value>Open files folder</value>
+    <value>เปิดโฟลเดอร์ที่เก็บไฟล์</value>
   </data>
   <data name="VS_SOURCECOLOR_LEGEND" xml:space="preserve">
     <value>Skin source legend: &lt;color=gray&gt;Original skin&lt;/color&gt; &lt;color=green&gt;Workshop/Staging&lt;/color&gt; &lt;color=yellow&gt;Shared Folder&lt;/color&gt;</value>
@@ -168,13 +168,13 @@ Note the ones with the same name will be overwritten anyway   </value>
 See files in the folder, edit them and reload in game to see the changes   </value>
   </data>
   <data name="VS_USINGSAVEGAMECONFIG" xml:space="preserve">
-    <value>Using savegame config</value>
+    <value>ใช้การตั้งค่าของเซฟเกม</value>
   </data>
   <data name="VS_USINGSHAREDCONFIG" xml:space="preserve">
-    <value>Using shared config</value>
+    <value>ใช้การตั้งค่าที่ใช้ร่วมกัน</value>
   </data>
   <data name="VS_EXPORTASSHARED" xml:space="preserve">
-    <value>Export current to shared</value>
+    <value>ส่งออกค่าปัจจุบันไปยังค่าที่ใช้ร่วมกัน</value>
   </data>
   <data name="VS_DISCARDSAVEGAME" xml:space="preserve">
     <value>Discard and use shared</value>
