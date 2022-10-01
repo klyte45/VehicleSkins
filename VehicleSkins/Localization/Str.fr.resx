@@ -118,63 +118,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="root_modDescription" xml:space="preserve">
-    <value>Multiplies vehicles skins possibilities</value>
+    <value>Multiplie les possibilités de skins de véhicules</value>
   </data>
   <data name="VS_MODELSELECT" xml:space="preserve">
-    <value>Select model</value>
+    <value>Sélectionnez un modèle</value>
   </data>
   <data name="VS_THEREARENOSKINS" xml:space="preserve">
-    <value>There are no skins loaded for this vehicle model</value>
+    <value>Il n'y a pas de skins chargés pour ce modèle de véhicule</value>
   </data>
   <data name="VS_CREATENEWSKIN" xml:space="preserve">
-    <value>Create new skin</value>
+    <value>Créer nouveau skin</value>
   </data>
   <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">
-    <value>Type the new skin name:</value>
+    <value>Tapez le nouveau nom du skin :</value>
   </data>
   <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
-    <value>&lt;color=yellow&gt;There's already a skin with this name!&lt;/color&gt;</value>
+    <value>&lt;color=yellow&gt;Il y a déjà un skin avec ce nom !&lt;/color&gt;</value>
   </data>
   <data name="VS_RELOADALLSKINS" xml:space="preserve">
-    <value>Reload all skins</value>
+    <value>Recharger tous les skins</value>
   </data>
   <data name="VS_RELOADASSETSKINS" xml:space="preserve">
-    <value>Reload all skins from current asset</value>
+    <value>Recharger tous les skins de la ressource actuelle</value>
   </data>
   <data name="VS_ACTIVERULESONLY" xml:space="preserve">
-    <value>Filter assets having at least one skin</value>
+    <value>Filtrer les ressources ayant au moins un skin</value>
   </data>
   <data name="VS_EXPORTTOASSET_TITLE" xml:space="preserve">
-    <value>Export shared skins to upload to Workshop</value>
+    <value>Exporter les skins partagés vers le Workshop</value>
   </data>
   <data name="VS_EXPORTTOASSET_MSG" xml:space="preserve">
-    <value>Do you want to erase all skins already exported to workshop?
-Note the ones with the same name will be overwritten anyway   </value>
+    <value>Voulez-vous effacer tous les skins déjà exportés vers le Workshop ?
+Notez que ceux portant le même nom seront remplacés   </value>
   </data>
   <data name="VS_EXPORTASSET" xml:space="preserve">
-    <value>Export shared to workshop</value>
+    <value>Exporter vers le Workshop</value>
   </data>
   <data name="VS_EXPORTTOASSET_MSGSUC" xml:space="preserve">
     <value>Files exported to be uploaded successfully!</value>
   </data>
   <data name="VS_VIEWFILES" xml:space="preserve">
-    <value>Open files folder</value>
+    <value>Ouvrir le dossier de fichiers</value>
   </data>
   <data name="VS_SOURCECOLOR_LEGEND" xml:space="preserve">
-    <value>Skin source legend: &lt;color=gray&gt;Original skin&lt;/color&gt; &lt;color=green&gt;Workshop/Staging&lt;/color&gt; &lt;color=yellow&gt;Shared Folder&lt;/color&gt;</value>
+    <value>Source de skin légende : &lt;color=gray&gt;Skin original&lt;/color&gt; &lt;color=green&gt;Workshop/Préparation&lt;/color&gt; &lt;color=yellow&gt;Dossier partagé&lt;/color&gt;</value>
   </data>
   <data name="VS_CREATESKIN_MSGSUC" xml:space="preserve">
-    <value>Skin files created!
-See files in the folder, edit them and reload in game to see the changes   </value>
+    <value>Fichiers de skin créés !
+Vous pouvez voir les fichiers dans le dossier, les modifier et les recharger dans le jeu pour voir les changements   </value>
   </data>
   <data name="VS_USINGSAVEGAMECONFIG" xml:space="preserve">
-    <value>Using savegame config</value>
+    <value>Utiliser la configuration de sauvegarde</value>
   </data>
   <data name="VS_USINGSHAREDCONFIG" xml:space="preserve">
-    <value>Using shared config</value>
+    <value>Utiliser la configuration partagée</value>
   </data>
   <data name="VS_EXPORTASSHARED" xml:space="preserve">
-    <value>Export current to shared</value>
+    <value>Exporter le courant pour être partagé</value>
   </data>
   <data name="VS_DISCARDSAVEGAME" xml:space="preserve">
     <value>Discard and use shared</value>
