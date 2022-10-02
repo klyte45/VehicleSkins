@@ -133,7 +133,7 @@
     <value>พิมพ์ชื่อสกินใหม่:</value>
   </data>
   <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
-    <value>&lt;color=yellow&gt;There's already a skin with this name!&lt;/color&gt;</value>
+    <value>&lt;color=yellow&gt;มีสกินชื่อนี้อยู่แล้ว&lt;/color&gt;</value>
   </data>
   <data name="VS_RELOADALLSKINS" xml:space="preserve">
     <value>โหลดสกินใหม่ทั้งหมด</value>
@@ -142,7 +142,7 @@
     <value>โหลดสกินใหม่ทั้งหมดจาก Asset ปัจจุบัน</value>
   </data>
   <data name="VS_ACTIVERULESONLY" xml:space="preserve">
-    <value>Filter assets having at least one skin</value>
+    <value>กรอง Assets ที่มีสกินอย่างน้อยหนึ่งรายการ</value>
   </data>
   <data name="VS_EXPORTTOASSET_TITLE" xml:space="preserve">
     <value>ส่งออกสกินที่ใช้งานร่วมกัน เพื่ออัปโหลดไปยังเวิร์กชอป</value>
