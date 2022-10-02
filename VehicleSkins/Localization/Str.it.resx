@@ -118,25 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="root_modDescription" xml:space="preserve">
-    <value>Multiplies vehicles skins possibilities</value>
+    <value>Moltiplica il numero di skin dei veicoli</value>
   </data>
   <data name="VS_MODELSELECT" xml:space="preserve">
-    <value>Select model</value>
+    <value>Seleziona modello</value>
   </data>
   <data name="VS_THEREARENOSKINS" xml:space="preserve">
-    <value>There are no skins loaded for this vehicle model</value>
+    <value>Non ci sono skin caricate per questo modello di veicolo</value>
   </data>
   <data name="VS_CREATENEWSKIN" xml:space="preserve">
-    <value>Create new skin</value>
+    <value>Crea nuova skin</value>
   </data>
   <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">
-    <value>Type the new skin name:</value>
+    <value>Digita il nome della nuova skin:</value>
   </data>
   <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
-    <value>&lt;color=yellow&gt;There's already a skin with this name!&lt;/color&gt;</value>
+    <value>&lt;color=yellow&gt;Esiste già una skin con questo nome!&lt;/color&gt;</value>
   </data>
   <data name="VS_RELOADALLSKINS" xml:space="preserve">
-    <value>Reload all skins</value>
+    <value>Ricarica tutte le skin</value>
   </data>
   <data name="VS_RELOADASSETSKINS" xml:space="preserve">
     <value>Reload all skins from current asset</value>
