@@ -130,7 +130,7 @@
     <value>Crear nueva skin</value>
   </data>
   <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">
-    <value>Escribe el nombre para la nueva Skin:</value>
+    <value>Escribe el nombre para la nueva skin:</value>
   </data>
   <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
     <value>&lt;color=yellow&gt;¡Ya hay una skin con este nombre!&lt;/color&gt;</value>
