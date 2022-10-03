@@ -1,4 +1,5 @@
-﻿using Kwytto.LiteUI;
+﻿using Kwytto.Interfaces;
+using Kwytto.LiteUI;
 using Kwytto.Utils;
 using System;
 using System.Collections;
@@ -11,7 +12,7 @@ using VehicleSkins.Tools;
 
 namespace VehicleSkins.UI
 {
-    internal class VSBaseLiteUI : GUIRootWindowBase
+    internal class VSBaseLiteUI : GUIOpacityChanging
     {
         public static VSBaseLiteUI Instance { get; private set; }
         public static ushort GrabbedId { get; private set; }
@@ -42,7 +43,14 @@ namespace VehicleSkins.UI
 
         protected override bool showOverModals => false;
 
-
+        protected override void OnOpacityChanged(float newVal)
+        {
+            base.OnOpacityChanged(newVal);
+            BgTextureSubgroup.SetPixel(0, 0, new Color(bgSubgroup.r, bgSubgroup.g, bgSubgroup.b, newVal));
+            BgTextureSubgroup.Apply();
+            BgTextureNote.SetPixel(0, 0, new Color(bgNote.r, bgNote.g, bgNote.b, newVal));
+            BgTextureNote.Apply();
+        }
 
         public void Update()
         {
@@ -115,20 +123,21 @@ namespace VehicleSkins.UI
             bgSubgroup = ModInstance.Instance.ModColor.SetBrightness(.20f);
 
             BgTextureSubgroup = new Texture2D(1, 1);
-            BgTextureSubgroup.SetPixel(0, 0, new Color(bgSubgroup.r, bgSubgroup.g, bgSubgroup.b, 1));
+            BgTextureSubgroup.SetPixel(0, 0, new Color(bgSubgroup.r, bgSubgroup.g, bgSubgroup.b, BasicIUserMod.Instance.UIOpacity));
             BgTextureSubgroup.Apply();
 
 
             bgNote = ModInstance.Instance.ModColor.SetBrightness(.60f);
             BgTextureNote = new Texture2D(1, 1);
-            BgTextureNote.SetPixel(0, 0, new Color(bgNote.r, bgNote.g, bgNote.b, 1));
+            BgTextureNote.SetPixel(0, 0, new Color(bgNote.r, bgNote.g, bgNote.b, BasicIUserMod.Instance.UIOpacity));
             BgTextureNote.Apply();
 
         }
 
 
-        public void Awake()
+        public override void Awake()
         {
+            base.Awake();
             Init($"{ModInstance.Instance.SimpleName} v{ModInstance.FullVersion}", new Rect(128, 128, 680, 420), resizable: true, minSize: new Vector2(340, 260));
             Instance = this;
             m_modelFilter = new GUIFilterItemsScreen<State>(Str.VS_MODELSELECT, ModInstance.Controller, OnFilterParam, OnVehicleSet, GoTo, State.Normal, State.SelectVehicle, otherFilters: DrawExtraFilter, extraButtonsSearch: ExtraButtonsSearch);

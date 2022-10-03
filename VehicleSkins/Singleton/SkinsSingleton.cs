@@ -156,14 +156,14 @@ namespace VehicleSkins.Singleton
             {
                 StopCoroutine(m_reloadCoroutine);
             }
+            m_skins.Clear();
+            m_cachedSkins.Clear();
+            ModInstance.Controller.ConnectorWE.ClearWELayoutRegisters();
             m_reloadCoroutine = StartCoroutine(ReloadSkins_Coroutine());
         }
 
         private IEnumerator ReloadSkins_Coroutine()
         {
-            m_skins.Clear();
-            m_cachedSkins.Clear();
-            ModInstance.Controller.ConnectorWE.ClearWELayoutRegisters();
             var models = Directory.GetDirectories(VSMainController.SKINS_FOLDER);
             foreach (var vehicleInfo in VehiclesIndexes.instance.PrefabsData.Values)
             {
