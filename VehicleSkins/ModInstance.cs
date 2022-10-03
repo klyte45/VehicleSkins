@@ -1,5 +1,7 @@
 using Kwytto.Interfaces;
 using Kwytto.Utils;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using UnityEngine;
@@ -7,7 +9,7 @@ using VehicleSkins.Localization;
 using VehicleSkins.Singleton;
 using VehicleSkins.UI;
 
-[assembly: AssemblyVersion("1.1.0.10006")]
+[assembly: AssemblyVersion("1.1.0.10007")]
 namespace VehicleSkins
 {
     public class ModInstance : BasicIUserMod<ModInstance, VSMainController>
@@ -39,5 +41,9 @@ namespace VehicleSkins
             base.OnLevelLoadingInternal();
             SkinsSingleton.instance.ReloadSkins();
         }
+        protected override Dictionary<string, Func<IBridgePrioritizable>> ModBridges { get; } = new Dictionary<string, Func<IBridgePrioritizable>>
+        {
+            ["Write Everywhere"] = () => controller?.ConnectorWE
+        };
     }
 }
