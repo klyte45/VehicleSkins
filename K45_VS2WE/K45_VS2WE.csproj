@@ -84,7 +84,12 @@
       <Aliases>WE</Aliases>
       <Private>False</Private>
     </Reference>
-    <Reference Include="WriteEverywhere.xml">
+    <Reference Include="WriteEverywhere.Layout">
+      <HintPath>..\..\_appdataMods\WriteEverywhere\WriteEverywhere.Layout.dll</HintPath>
+      <Aliases>WE</Aliases>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WriteEverywhere.Xml">
       <HintPath>..\..\_appdataMods\WriteEverywhere\WriteEverywhere.Xml.dll</HintPath>
       <Aliases>WE</Aliases>
       <Private>False</Private>
