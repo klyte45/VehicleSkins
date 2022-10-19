@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using VS::VehicleSkins.Singleton;
 using WE::WriteEverywhere.ModShared;
-using WE::WriteEverywhere.Xml;
+using WE::WriteEverywhere.Layout;
 
 namespace K45_VS2WE
 {
