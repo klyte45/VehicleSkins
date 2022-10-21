@@ -248,7 +248,7 @@ namespace VehicleSkins.Singleton
                     var filePath = Path.Combine(folder, subFile.First);
                     if (subFile.First.EndsWith(".png"))
                     {
-                        var tex = TextureAtlasUtils.LoadTextureFromFile(filePath);
+                        var tex = TextureAtlasUtils.LoadTextureFromFile(filePath, linear: false);
                         if (tex is null)
                         {
                             continue;
