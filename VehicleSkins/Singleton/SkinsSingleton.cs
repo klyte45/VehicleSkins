@@ -493,7 +493,7 @@ namespace VehicleSkins.Singleton
             }
             else
             {
-                if (tryUseSkin != null && skinData.ContainsKey(tryUseSkin))
+                if (tryUseSkin.TrimToNull() != null && skinData.ContainsKey(tryUseSkin))
                 {
                     m_cachedSkins[targetIdx] = tryUseSkin;
                 }
@@ -510,7 +510,7 @@ namespace VehicleSkins.Singleton
         public bool GetSkin(VehicleInfo info, string skinName, out MaterialContainer material)
         {
             material = null;
-            return m_skins.TryGetValue(info.name, out var skinData) ? skinData.TryGetValue(skinName, out material) : false;
+            return m_skins.TryGetValue(info.name, out var skinData) && skinData.TryGetValue(skinName, out material);
         }
 
         public void ResetCache()
