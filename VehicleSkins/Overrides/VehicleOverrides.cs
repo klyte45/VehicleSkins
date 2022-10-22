@@ -1,5 +1,4 @@
 ﻿using Kwytto.Utils;
-using System;
 using System.Reflection;
 using UnityEngine;
 using VehicleSkins.Singleton;
@@ -14,8 +13,8 @@ namespace VehicleSkins.Overrides
 
         #region Events
 
-        public static void PreRender(ref VehicleInfo info, ref InstanceID id, ref bool __state) => __state = SkinsSingleton.instance.SetSkin(info, id.Vehicle, false);
-        public static void PreRenderParked(ref VehicleParked __instance, ref ushort parkedVehicleID, ref bool __state) => __state = SkinsSingleton.instance.SetSkin(__instance.Info, parkedVehicleID, true);
+        public static void PreRender(ref VehicleInfo info, ref InstanceID id, ref bool __state) => __state = SkinsSingleton.instance.SetSkin(info, id.Vehicle, ref VehicleManager.instance.m_vehicles.m_buffer[id.Vehicle]);
+        public static void PreRenderParked(ref VehicleParked __instance, ref ushort parkedVehicleID, ref bool __state) => __state = SkinsSingleton.instance.SetSkin(__instance.Info, parkedVehicleID);
         public static void PostRenderParked(ref VehicleParked __instance, ref ushort parkedVehicleID, ref bool __state)
         {
             if (__state)
@@ -92,29 +91,4 @@ namespace VehicleSkins.Overrides
         }
         #endregion
     }
-    public class CameraOverrides : MonoBehaviour, IRedirectable
-    {
-        public Redirector RedirectorInstance { get; set; }
-
-        private void Awake()
-        {
-            RedirectorInstance = GameObjectUtils.CreateElement<Redirector>(transform);
-            var overrideVeh = typeof(VehicleOverrides).GetMethod("AfterUpdateTransformOverride", ReflectionUtils.allFlags);
-            var src = typeof(CameraController).GetMethod("UpdateTransform", ReflectionUtils.allFlags);
-            var src2 = Type.GetType("CameraPositions.Detours.CameraControllerDetour, CameraPositions.dll")?.GetMethod("UpdateTransform", ReflectionUtils.allFlags);
-            foreach (var m in new[] { overrideVeh })
-            {
-                RedirectorInstance.AddRedirect(src, null, m);
-                if (src2 != null)
-                {
-                    LogUtils.DoLog("CameraPositions was found!");
-                    RedirectorInstance.AddRedirect(src2, null, m);
-                }
-            }
-
-        }
-    }
-}
-namespace VehicleSkins.ModShared
-{
 }

@@ -1,16 +1,17 @@
 ﻿extern alias VS;
 extern alias WE;
-using Bridge_VS2WE;
 using Kwytto.Utils;
 using System.Collections.Generic;
 using System.IO;
+using VS::VehicleSkins;
+using VS::VehicleSkins.ModShared;
 using VS::VehicleSkins.Singleton;
-using WE::WriteEverywhere.ModShared;
 using WE::WriteEverywhere.Layout;
+using WE::WriteEverywhere.ModShared;
 
 namespace K45_VS2WE
 {
-    public class BridgeWE : IBridge
+    public class BridgeWE : IBridgeWE
     {
         public override bool WEAvailable { get; } = true;
 
@@ -30,9 +31,9 @@ namespace K45_VS2WE
         public override ushort CurrentFocusVehicle => WEFacade.CurrentGrabbedVehicleId;
 
         public override void ClearWELayoutRegisters() => m_skinLayouts.Clear();
-        public override bool GetSkinDescriptorForVehicle<T>(VehicleInfo vehicle, ushort vehicleId, bool isParked, out T layout)
+        public override bool GetSkinDescriptorForVehicle<T>(VehicleInfo vehicleInfo, ushort vehicleId, bool isParked, out T layout, ushort buildingId)
         {
-            if (SkinsSingleton.instance.GetSkin(vehicle, vehicleId, isParked, out var skin))
+            if (SkinsSingleton.instance.GetSkin(vehicleInfo, vehicleId, isParked, out var skin, ModInstance.Controller.ConnectorCD.GetPreferredSkin(buildingId)))
             {
                 layout = skin.wtsLayoutId < 0 ? null : m_skinLayouts[skin.wtsLayoutId] as T;
                 return true;

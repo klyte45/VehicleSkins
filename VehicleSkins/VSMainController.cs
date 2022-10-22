@@ -1,8 +1,8 @@
-using Bridge_VS2WE;
 using ColossalFramework.UI;
 using Kwytto.Interfaces;
 using Kwytto.Utils;
 using System.IO;
+using VehicleSkins.ModShared;
 using VehicleSkins.Singleton;
 using VehicleSkins.Tools;
 using VehicleSkins.UI;
@@ -17,7 +17,8 @@ namespace VehicleSkins
         public static readonly string SKINS_FOLDER = Path.Combine(FOLDER_NAME, "Skins");
 
         public static SkinsSingleton Skins => SkinsSingleton.instance;
-        public IBridge ConnectorWE { get; } = BridgeUtils.GetMostPrioritaryImplementation<IBridge>();
+        public IBridgeWE ConnectorWE { get; } = BridgeUtils.GetMostPrioritaryImplementation<IBridgeWE>();
+        public IBridgeCD ConnectorCD { get; } = BridgeUtils.GetMostPrioritaryImplementation<IBridgeCD>();
 
         public void Awake()
         {

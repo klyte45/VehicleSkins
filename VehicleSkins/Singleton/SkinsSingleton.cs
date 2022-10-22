@@ -368,14 +368,33 @@ namespace VehicleSkins.Singleton
             }
         }
 
-        internal bool SetSkin(VehicleInfo info, ushort vehicleId, bool isParked)
+        internal bool SetSkin(VehicleInfo info, ushort vehicleId, ref Vehicle vehicle)
+        {
+            if (SceneUtils.IsAssetEditor)
+            {
+                return SetSkinAssetEditor(info);
+            }
+            var tryForceSkin = "";
+            if (ModInstance.Controller.ConnectorCD.IsBridgeEnabled && vehicle.m_sourceBuilding != 0)
+            {
+                tryForceSkin = ModInstance.Controller.ConnectorCD.GetPreferredSkin(vehicle.m_sourceBuilding);
+            }
+            GetSkin(info, vehicleId, false, out var material, tryForceSkin);
+            if (!(material is null))
+            {
+                //info.m_lodMaterial = material.lod;
+                info.m_material = material.main;
+            }
+            return !(material is null);
+        }
+        internal bool SetSkin(VehicleInfo info, ushort vehicleId)
         {
             if (SceneUtils.IsAssetEditor)
             {
                 return SetSkinAssetEditor(info);
             }
 
-            GetSkin(info, vehicleId, isParked, out var material);
+            GetSkin(info, vehicleId, true, out var material, null);
             if (!(material is null))
             {
                 //info.m_lodMaterial = material.lod;
@@ -402,7 +421,7 @@ namespace VehicleSkins.Singleton
             return !(material is null);
         }
 
-        public bool GetSkin(VehicleInfo info, ushort vehicleId, bool isParked, out MaterialContainer material)
+        public bool GetSkin(VehicleInfo info, ushort vehicleId, bool isParked, out MaterialContainer material, string tryUseSkin)
         {
             var targetIdx = vehicleId | (isParked ? 0x80000000u : 0);
             material = null;
@@ -425,7 +444,7 @@ namespace VehicleSkins.Singleton
                 {
                     if (!m_cachedSkins.TryGetValue(targetIdx, out var skinName) || (!skinData.TryGetValue(skinName, out material)))
                     {
-                        return UpdateSkinCache(targetIdx, ref material, skinData);
+                        return UpdateSkinCache(targetIdx, ref material, skinData, tryUseSkin);
                     }
                 }
                 else
@@ -438,12 +457,12 @@ namespace VehicleSkins.Singleton
                             m_skins.TryGetValue(VehicleManager.instance.m_vehicles.m_buffer[firstVehicle].Info.name, out var skinDataFirst);
                             if (skinDataFirst is null || skinDataFirst.Count == 0)
                             {
-                                UpdateSkinCache(targetIdx, ref material, skinData);
+                                UpdateSkinCache(targetIdx, ref material, skinData, tryUseSkin);
                                 m_cachedSkins[firstVehicle] = null;
                             }
                             else
                             {
-                                UpdateSkinCache(firstVehicle, ref material, skinDataFirst);
+                                UpdateSkinCache(firstVehicle, ref material, skinDataFirst, tryUseSkin);
                                 skinName = m_cachedSkins[targetIdx] = m_cachedSkins[firstVehicle];
                                 if (skinName is null || !skinData.ContainsKey(skinName))
                                 {
@@ -457,7 +476,7 @@ namespace VehicleSkins.Singleton
                     {
                         if (!m_cachedSkins.TryGetValue(targetIdx, out var skinName) || !(skinName is null || skinData.TryGetValue(skinName, out material)))
                         {
-                            return UpdateSkinCache(targetIdx, ref material, skinData);
+                            return UpdateSkinCache(targetIdx, ref material, skinData, tryUseSkin);
                         }
                     }
                 }
@@ -466,7 +485,7 @@ namespace VehicleSkins.Singleton
             return false;
         }
 
-        private bool UpdateSkinCache(uint targetIdx, ref MaterialContainer material, Dictionary<string, MaterialContainer> skinData)
+        private bool UpdateSkinCache(uint targetIdx, ref MaterialContainer material, Dictionary<string, MaterialContainer> skinData, string tryUseSkin)
         {
             if (skinData is null || skinData.Count == 0)
             {
@@ -474,8 +493,15 @@ namespace VehicleSkins.Singleton
             }
             else
             {
-                var activeSkins = skinData.ToList().Where(x => x.Value.Active).ToList();
-                m_cachedSkins[targetIdx] = activeSkins.Count > 0 ? activeSkins[(int)((targetIdx * 2465737L) & 0x7FFFFFFL) % activeSkins.Count].Key : "";
+                if (tryUseSkin != null && skinData.ContainsKey(tryUseSkin))
+                {
+                    m_cachedSkins[targetIdx] = tryUseSkin;
+                }
+                else
+                {
+                    var activeSkins = skinData.ToList().Where(x => x.Value.Active).ToList();
+                    m_cachedSkins[targetIdx] = activeSkins.Count > 0 ? activeSkins[(int)((targetIdx * 2465737L) & 0x7FFFFFFL) % activeSkins.Count].Key : "";
+                }
                 skinData.TryGetValue(m_cachedSkins[targetIdx], out material);
             }
             return !m_cachedSkins[targetIdx].IsNullOrWhiteSpace();
@@ -485,6 +511,11 @@ namespace VehicleSkins.Singleton
         {
             material = null;
             return m_skins.TryGetValue(info.name, out var skinData) ? skinData.TryGetValue(skinName, out material) : false;
+        }
+
+        public void ResetCache()
+        {
+            m_cachedSkins.Clear();
         }
 
         private readonly SimpleNonSequentialList<string> m_cachedSkins = new SimpleNonSequentialList<string>();

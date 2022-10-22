@@ -43,7 +43,8 @@ namespace VehicleSkins
         }
         protected override Dictionary<string, Func<IBridgePrioritizable>> ModBridges { get; } = new Dictionary<string, Func<IBridgePrioritizable>>
         {
-            ["Write Everywhere"] = () => controller?.ConnectorWE
+            ["Write Everywhere"] = () => controller?.ConnectorWE,
+            ["Custom Data Mod"] = () => controller?.ConnectorCD
         };
     }
 }

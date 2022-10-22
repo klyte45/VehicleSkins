@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{04686545-CA98-4B9D-8E6D-09DC9921C7B9}</ProjectGuid>
+    <ProjectGuid>{7D5F6A90-50A3-430D-ABB9-E77437D53EF6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>K45_VS2WE</RootNamespace>
-    <AssemblyName>K45_VS2WE</AssemblyName>
+    <RootNamespace>K45_VS2CD</RootNamespace>
+    <AssemblyName>K45_VS2CD</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -37,27 +37,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BridgeWE.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\KwyttoUtilityVS\KwyttoUtilityVS.csproj">
-      <Project>{27c920f8-f40f-4d56-bcb6-9c9025ed0a0c}</Project>
-      <Name>KwyttoUtilityVS</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\VehicleSkins\VehicleSkins.csproj">
-      <Project>{14c19b0f-7a46-4120-a7f4-c1cc33f0fe1c}</Project>
-      <Name>VehicleSkins</Name>
-      <Aliases>VS</Aliases>
-      <Private>False</Private>
-    </ProjectReference>
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\_managed\UnityEngine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\_managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
@@ -74,27 +53,30 @@
       <HintPath>..\..\_managed\ICities.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="WriteEverywhere">
-      <HintPath>..\..\_appdataMods\WriteEverywhere\WriteEverywhere.dll</HintPath>
-      <Aliases>WE</Aliases>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="WriteEverywhere.Layout">
-      <HintPath>..\..\_appdataMods\WriteEverywhere\WriteEverywhere.Layout.dll</HintPath>
-      <Aliases>WE</Aliases>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="WriteEverywhere.Xml">
-      <HintPath>..\..\_appdataMods\WriteEverywhere\WriteEverywhere.Xml.dll</HintPath>
-      <Aliases>WE</Aliases>
+    <Reference Include="CustomData">
+      <HintPath>..\..\_appdataMods\CustomData\CustomData.dll</HintPath>
+      <Aliases>CD</Aliases>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="**/*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KwyttoUtilityVS\KwyttoUtilityVS.csproj">
+      <Project>{27c920f8-f40f-4d56-bcb6-9c9025ed0a0c}</Project>
+      <Name>KwyttoUtilityVS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehicleSkins\VehicleSkins.csproj">
+      <Project>{14c19b0f-7a46-4120-a7f4-c1cc33f0fe1c}</Project>
+      <Name>VehicleSkins</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>set "ModDir=%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\"
 
 xcopy /y /e "$(TargetPath)*" "%25ModDir%25"
 </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

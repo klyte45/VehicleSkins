@@ -1,8 +1,7 @@
-﻿using Bridge_VS2WE;
-
+﻿
 namespace VehicleSkins.ModShared
 {
-    public class BridgeWEFallback : IBridge
+    public class BridgeWEFallback : IBridgeWE
     {
         public override bool WEAvailable { get; } = false;
 
@@ -25,7 +24,7 @@ namespace VehicleSkins.ModShared
             return false;
         }
 
-        public override bool GetSkinDescriptorForVehicle<T>(VehicleInfo vehicle, ushort vehicleId, bool isParked, out T layout)
+        public override bool GetSkinDescriptorForVehicle<T>(VehicleInfo vehicle, ushort vehicleId, bool isParked, out T layout, ushort buildingId)
         {
             layout = null;
             return false;

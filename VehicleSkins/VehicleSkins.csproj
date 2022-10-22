@@ -87,10 +87,6 @@
     <Compile Include="**\*.cs" Exclude="Localization\Str.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bridge_VS2WE\Bridge_VS2WE.csproj">
-      <Project>{DC342648-D5BD-446C-991C-7707B63AEFE3}</Project>
-      <Name>Bridge_VS2WE</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KwyttoUtilityVS\KwyttoUtilityVS.csproj">
       <Project>{27C920F8-F40F-4D56-BCB6-9C9025ED0A0C}</Project>
       <Name>KwyttoUtilityVS</Name>
