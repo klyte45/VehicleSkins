@@ -28,12 +28,12 @@ namespace VehicleSkins.Singleton
             public readonly string skinName;
             public readonly Material main;
             public readonly Material lod;
-            public readonly bool defaultActive;
+            public bool defaultActive;
             public readonly Source source;
             public int wtsLayoutId;
             public bool Active
             {
-                get => VSSkinSelectionData.Instance.GeneralExcludedSkins.TryGetValue(assetName, out var list) ? !list.Contains(skinName) : defaultActive;
+                get => VSSkinSelectionData.Instance.GeneralExcludedSkins.TryGetValue(assetName, out var list) ? !list.Contains(skinName.TrimToNull()) : defaultActive;
                 set
                 {
                     if (value)
@@ -93,6 +93,8 @@ namespace VehicleSkins.Singleton
         public const string EXCLUDED_SKINS_FILENAME = "_ExcludedSkins.txt";
         public const string EXCLUDED_DEFAULT_SKIN_STRING = "<\\DEFAULT/>";
 
+        public bool IsLoading => m_reloadCoroutine != null;
+
         private Coroutine m_reloadCoroutine;
         public event Action OnReloadCoroutineDone;
 
@@ -102,12 +104,17 @@ namespace VehicleSkins.Singleton
             m_cachedSkins.Clear();
         }
 
-        internal void ExportCurrentAsShared(VehicleInfo info, bool shared)
+        internal void ExportCurrentAsShared(VehicleInfo info)
         {
             if (VSSkinSelectionData.Instance.GeneralExcludedSkins.TryGetValue(info.name, out var list))
             {
-                File.WriteAllLines(Path.Combine(shared ? GetDirectoryForAssetShared(info) : GetDirectoryForAssetOwn(info), EXCLUDED_SKINS_FILENAME), list.Select(x => x ?? EXCLUDED_DEFAULT_SKIN_STRING).ToArray());
+                var folder = GetDirectoryForAssetShared(info);
+                File.WriteAllLines(Path.Combine(folder, EXCLUDED_SKINS_FILENAME), list.Select(x => x ?? EXCLUDED_DEFAULT_SKIN_STRING).ToArray());
                 StartCoroutine(RealoadSkinsOfInfo(info));
+                foreach (var entry in m_skins[info.name])
+                {
+                    entry.Value.Active = !list.Any(x => x != "" && (x ?? "") == entry.Key);
+                }
             }
         }
         internal void ExportSharedsAsOwn(VehicleInfo info, bool deleteExisting)
@@ -187,7 +194,9 @@ namespace VehicleSkins.Singleton
 
             m_cachedSkins.Clear();
             OnReloadCoroutineDone?.Invoke();
+            VSBaseLiteUI.Instance.Reset();
             OnReloadCoroutineDone = null;
+            m_reloadCoroutine = null;
         }
 
         private IEnumerator LoadFromWorkshopAssetFolder(VehicleInfo vehicleInfo)
@@ -215,20 +224,19 @@ namespace VehicleSkins.Singleton
             var baseMaterial = info.m_material;
             var baseLodMaterial = info.m_lodMaterial;
             var subFiles = Directory.GetFiles(folder);
-            var disabledSkins = subFiles.Where(x => Path.GetFileName(x) == EXCLUDED_SKINS_FILENAME).SelectMany(x => File.ReadAllLines(x)).Select(x => x.TrimToNull());
-            if (!m_skins[assetName].ContainsKey(""))
-            {
-                m_skins[assetName][""] = new MaterialContainer
-                (
-                    assetName: assetName,
-                    skinName: null,
-                    main: baseMaterial,
-                    lod: baseLodMaterial,
-                    wtsLayoutId: -1,
-                    source: Source.ORIGINAL,
-                    defaultActive: !disabledSkins.Contains(EXCLUDED_DEFAULT_SKIN_STRING)
-                );
-            }
+            var disabledSkins = subFiles.Where(x => Path.GetFileName(x) == EXCLUDED_SKINS_FILENAME).SelectMany(x => File.ReadAllLines(x)).Where(x => !(x.TrimToNull() is null));
+
+            m_skins[assetName][""] = new MaterialContainer
+            (
+                assetName: assetName,
+                skinName: null,
+                main: baseMaterial,
+                lod: baseLodMaterial,
+                wtsLayoutId: -1,
+                source: Source.ORIGINAL,
+                defaultActive: !disabledSkins.Contains(EXCLUDED_DEFAULT_SKIN_STRING)
+            );
+
 
             var fileGroups = subFiles.Select(x =>
             {
@@ -315,6 +323,7 @@ namespace VehicleSkins.Singleton
                 }
 
             }
+
         }
 
         public IEnumerator RealoadSkinsOfInfo(VehicleInfo info, Action callback = null)

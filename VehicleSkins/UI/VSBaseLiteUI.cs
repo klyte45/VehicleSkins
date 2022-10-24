@@ -182,6 +182,7 @@ namespace VehicleSkins.UI
         {
             m_currentState = State.Normal;
             CurrentTab = 0;
+            m_detailUI.Reset();
         }
 
         private State m_currentState = State.Normal;

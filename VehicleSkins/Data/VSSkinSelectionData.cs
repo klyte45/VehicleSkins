@@ -38,7 +38,7 @@ namespace VehicleSkins.Data
                 {
                     foreach (var kv in value)
                     {
-                        GeneralExcludedSkins[kv.Key] = new HashSet<string>(kv.Value.Select(x => x == SkinsSingleton.EXCLUDED_DEFAULT_SKIN_STRING ? null : x));
+                        GeneralExcludedSkins[kv.Key] = new HashSet<string>(kv.Value.Where(x => x.TrimToNull() != null).Select(x => x == SkinsSingleton.EXCLUDED_DEFAULT_SKIN_STRING ? null : x));
                     }
                 }
             }

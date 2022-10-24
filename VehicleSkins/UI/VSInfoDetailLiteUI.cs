@@ -40,6 +40,12 @@ namespace VehicleSkins.UI
 
         internal void DoDraw(Rect rect, VehicleInfo currentInfo, VehicleInfo parentInfo, int currentInfoIndex, int infoTrailersSize)
         {
+            if (SkinsSingleton.instance.IsLoading)
+            {
+                GUILayout.Label(Str.vs_vsStillLoadingSkins);
+                return;
+            }
+
             if (m_currentInfo != currentInfo)
             {
                 OnChangeInfo(currentInfo, parentInfo, infoTrailersSize);
@@ -236,7 +242,7 @@ namespace VehicleSkins.UI
             OnChangeInfo(m_currentInfo, m_currentParent);
         }
 
-        private void DoExportShared() => SkinsSingleton.instance.ExportCurrentAsShared(m_currentInfo, SceneUtils.IsAssetEditor);
+        private void DoExportShared() => SkinsSingleton.instance.ExportCurrentAsShared(m_currentInfo);
         private void DoExportAsset()
         {
             if (Directory.Exists(SkinsSingleton.instance.GetDirectoryForAssetOwn(m_currentInfo)))
@@ -318,6 +324,11 @@ namespace VehicleSkins.UI
                 SkinsSingleton.instance.StopCoroutine(m_currentReloadCoroutine);
             }
             m_currentReloadCoroutine = SkinsSingleton.instance.StartCoroutine(SkinsSingleton.instance.RealoadSkinsOfInfo(m_currentInfo, () => OnChangeInfo(m_currentInfo, m_currentParent)));
+        }
+
+        public void Reset()
+        {
+            m_currentInfo = null;
         }
     }
 }

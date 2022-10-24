@@ -286,5 +286,14 @@ namespace VehicleSkins.Localization {
                 return ResourceManager.GetString("VS_VIEWFILES", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Vehicle Skins is loading skins....
+        /// </summary>
+        internal static string vs_vsStillLoadingSkins {
+            get {
+                return ResourceManager.GetString("vs_vsStillLoadingSkins", resourceCulture);
+            }
+        }
     }
 }

@@ -1,10 +1,9 @@
-<size=16>
-<size=30><color=yellow>Welcome to Vehicle Skins 1.1!</color></size>
+<color=yellow>Welcome to Vehicle Skins 1.1!</color>
 
 In this version the news are:
 
 - Added integration with Write Everywhere
+- Added integration with Custom Data Mod to force a skin for all vehicles from a building
 - Now the camera will focus at picked vehicle to preview skins
 - Added a field to select the skin to be previewed
 - Mod rewritten in new Kwytto Framework
-</size>
