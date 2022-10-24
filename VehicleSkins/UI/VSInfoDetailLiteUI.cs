@@ -114,7 +114,10 @@ namespace VehicleSkins.UI
                                 new KwyttoDialog.ButtonDefinition
                                 {
                                     title = Locale.Get("EXCEPTION_OK"),
-                                    onClick = () =>true,
+                                    onClick = () =>{
+                                        m_currentScreenState = State.Normal;
+                                        return true;
+                                    },
                                     style = KwyttoDialog.ButtonStyle.White
                                 }
                             }
@@ -157,10 +160,6 @@ namespace VehicleSkins.UI
                 {
                     GUILayout.Label((isLocalConfig ? Str.VS_USINGSAVEGAMECONFIG : Str.VS_USINGSHAREDCONFIG));
                 }
-                else
-                {
-                    GUILayout.Label((isLocalConfig ? Str.VS_DEFAULTSNOTSAVED : Str.VS_DEFAULTSSAVED));
-                }
 
                 using (new GUILayout.HorizontalScope())
                 {
@@ -178,23 +177,23 @@ namespace VehicleSkins.UI
                 {
                     using (new GUILayout.HorizontalScope())
                     {
-                        if (isLocalConfig && GUILayout.Button((isAssetEditor ? Str.VS_SAVESKINENABLESELECTION : Str.VS_EXPORTASSHARED)))
+                        if (isLocalConfig && GUILayout.Button(Str.VS_EXPORTASSHARED))
                         {
                             DoExportShared();
                         }
-                        if (isLocalConfig && GUILayout.Button(isAssetEditor ? Str.VS_DISCARDCHANGES : Str.VS_DISCARDSAVEGAME))
+                        if (isLocalConfig && GUILayout.Button(Str.VS_DISCARDSAVEGAME))
                         {
                             DiscardLocal();
                         }
                     }
-                }
-                if (!m_isVanillaAsset && !isAssetEditor)
-                {
-                    using (new GUILayout.HorizontalScope())
+                    if (!m_isVanillaAsset)
                     {
-                        if (GUILayout.Button(Str.VS_EXPORTASSET))
+                        using (new GUILayout.HorizontalScope())
                         {
-                            DoExportAsset();
+                            if (GUILayout.Button(Str.VS_EXPORTASSET))
+                            {
+                                DoExportAsset();
+                            }
                         }
                     }
                 }
@@ -210,13 +209,13 @@ namespace VehicleSkins.UI
                         using (new GUILayout.HorizontalScope())
                         {
                             var currentActive = skin.Active;
-                            if (currentActive != GUILayout.Toggle(currentActive, $"<color={GetColornameFromSource(skin.source)}>{skin.skinName.TrimToNull() ?? "<DEFAULT>"}</color>"))
+                            if (!isAssetEditor && currentActive != GUILayout.Toggle(currentActive, $"<color={GetColornameFromSource(skin.source)}>{skin.skinName.TrimToNull() ?? "<DEFAULT>"}</color>"))
                             {
                                 skin.Active = !currentActive;
                             }
-                            if (isAssetEditor && GUILayout.Button("PREVIEW", skin.skinName == m_currentSelectedSkin[currentInfoIndex] ? VSBaseLiteUI.Instance.GreenButton : GUI.skin.button, GUILayout.Width(60)))
+                            else if (isAssetEditor)
                             {
-                                m_currentSelectedSkin[currentInfoIndex] = skin.skinName;
+                                GUILayout.Label($"<color={GetColornameFromSource(skin.source)}>{skin.skinName.TrimToNull() ?? "<DEFAULT>"}</color>");
                             }
                         }
                     }

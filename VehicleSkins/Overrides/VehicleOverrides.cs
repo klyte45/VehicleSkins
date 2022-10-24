@@ -10,7 +10,6 @@ namespace VehicleSkins.Overrides
     {
         public Redirector RedirectorInstance { get; private set; }
 
-
         #region Events
 
         public static void PreRender(ref VehicleInfo info, ref InstanceID id, ref bool __state) => __state = SkinsSingleton.instance.SetSkin(info, id.Vehicle, ref VehicleManager.instance.m_vehicles.m_buffer[id.Vehicle]);
@@ -39,7 +38,8 @@ namespace VehicleSkins.Overrides
             {
                 SkinsSingleton.instance.SetSkin(info, "");
             }
-            if (VSBaseLiteUI.Instance.Visible
+            if (!SceneUtils.IsAssetEditor
+                && VSBaseLiteUI.Instance.Visible
                 //&& VSBaseLiteUI.LockSelection 
                 && !VSBaseLiteUI.GrabbedIsParked
                 && VSBaseLiteUI.GrabbedId == id.Vehicle)
@@ -59,7 +59,7 @@ namespace VehicleSkins.Overrides
         private static float targetHeight;
         public static void AfterUpdateTransformOverride(CameraController __instance)
         {
-            if (ModInstance.Controller.ConnectorWE.IsAnyEditorOpen || (LoadingManager.instance.m_loadingComplete && SimulationManager.instance.m_currentTickIndex - lastFrameOverride > 24))
+            if (SceneUtils.IsAssetEditor || ModInstance.Controller.ConnectorWE.IsAnyEditorOpen || (LoadingManager.instance.m_loadingComplete && SimulationManager.instance.m_currentTickIndex - lastFrameOverride > 24))
             {
                 return;
             }

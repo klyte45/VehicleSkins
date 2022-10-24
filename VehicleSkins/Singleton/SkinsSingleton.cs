@@ -379,10 +379,6 @@ namespace VehicleSkins.Singleton
 
         internal bool SetSkin(VehicleInfo info, ushort vehicleId, ref Vehicle vehicle)
         {
-            if (SceneUtils.IsAssetEditor)
-            {
-                return SetSkinAssetEditor(info);
-            }
             var tryForceSkin = "";
             if (ModInstance.Controller.ConnectorCD.IsBridgeEnabled && vehicle.m_sourceBuilding != 0)
             {
@@ -398,30 +394,7 @@ namespace VehicleSkins.Singleton
         }
         internal bool SetSkin(VehicleInfo info, ushort vehicleId)
         {
-            if (SceneUtils.IsAssetEditor)
-            {
-                return SetSkinAssetEditor(info);
-            }
-
             GetSkin(info, vehicleId, true, out var material, null);
-            if (!(material is null))
-            {
-                //info.m_lodMaterial = material.lod;
-                info.m_material = material.main;
-            }
-            return !(material is null);
-        }
-
-
-        internal bool SetSkinAssetEditor(VehicleInfo info)
-        {
-            if (info is null)
-            {
-                return false;
-            }
-
-            var targetSkin = VSBaseLiteUI.Instance.GetSelectedSkinFor(info) ?? "";
-            GetSkin(info, targetSkin, out var material);
             if (!(material is null))
             {
                 //info.m_lodMaterial = material.lod;
@@ -436,6 +409,10 @@ namespace VehicleSkins.Singleton
             material = null;
             if (m_skins.TryGetValue(info.name, out var skinData))
             {
+                if (VSBaseLiteUI.Instance.Visible && SceneUtils.IsAssetEditor && !VSBaseLiteUI.Instance.Minimized)
+                {
+                    return VSBaseLiteUI.Instance.GrabbedTargetSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);
+                }
                 if (ModInstance.Controller.ConnectorWE.IsWEVehicleEditorOpen
                     && ModInstance.Controller.ConnectorWE.CurrentFocusVehicle == vehicleId
                     && !isParked)
@@ -443,8 +420,8 @@ namespace VehicleSkins.Singleton
                     return ModInstance.Controller.ConnectorWE.CurrentSelectionSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);
                 }
                 if (VSBaseLiteUI.Instance.Visible
-                //&& VSBaseLiteUI.LockSelection 
-                && VSBaseLiteUI.GrabbedIsParked == isParked
+                 //&& VSBaseLiteUI.LockSelection 
+                 && VSBaseLiteUI.GrabbedIsParked == isParked
                 && VSBaseLiteUI.GrabbedId == vehicleId)
                 {
                     return VSBaseLiteUI.Instance.GrabbedTargetSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);

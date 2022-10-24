@@ -17,11 +17,13 @@ namespace VehicleSkins
         public static readonly string SKINS_FOLDER = Path.Combine(FOLDER_NAME, "Skins");
 
         public static SkinsSingleton Skins => SkinsSingleton.instance;
-        public IBridgeWE ConnectorWE { get; } = BridgeUtils.GetMostPrioritaryImplementation<IBridgeWE>();
-        public IBridgeCD ConnectorCD { get; } = BridgeUtils.GetMostPrioritaryImplementation<IBridgeCD>();
+        public IBridgeWE ConnectorWE { get; private set; }
+        public IBridgeCD ConnectorCD { get; private set; }
 
         public void Awake()
         {
+            ConnectorWE = BridgeUtils.GetMostPrioritaryImplementation<IBridgeWE>();
+            ConnectorCD = BridgeUtils.GetMostPrioritaryImplementation<IBridgeCD>();
             ToolsModifierControl.toolController.AddExtraToolToController<VehicleSkinsTool>();
         }
         protected override void StartActions()
