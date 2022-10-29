@@ -7,3 +7,4 @@ In this version the news are:
 - Now the camera will focus at picked vehicle to preview skins
 - Added a field to select the skin to be previewed
 - Mod rewritten in new Kwytto Framework
+- Fixed support to the Asset Editor

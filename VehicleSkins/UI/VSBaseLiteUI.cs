@@ -256,7 +256,7 @@ namespace VehicleSkins.UI
             }
             else
             {
-                m_modelFilter.DrawButton(size.x, inf?.GetUncheckedLocalizedTitle());
+                m_modelFilter.DrawButton(size.x, inf?.GetUncheckedLocalizedTitle(), true);
             }
 
             if (inf)

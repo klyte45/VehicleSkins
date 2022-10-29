@@ -155,7 +155,7 @@ namespace VehicleSkins.Singleton
         internal bool HasSkins(VehicleInfo info) => m_skins.TryGetValue(info.name, out var skins) && skins.Count > 1;
 
         public string GetDirectoryForAssetShared(PrefabInfo info) => Path.Combine(VSMainController.SKINS_FOLDER, info.name);
-        public string GetDirectoryForAssetOwn(PrefabInfo info) => KFileUtils.GetRootFolderForK45(info) is string str ? Path.Combine(Path.Combine(str, VSMainController.EXTRA_SPRITES_FILES_FOLDER_ASSETS), PrefabUtils.GetAssetFromPrefab(info).name) : null;
+        public string GetDirectoryForAssetOwn(PrefabInfo info) => KFileUtils.GetRootFolderForK45(info) is string str ? Path.Combine(Path.Combine(str, VSMainController.EXTRA_SPRITES_FILES_FOLDER_ASSETS), PrefabUtils.GetAssetFromPrefab(info).name.Split('.').Last()) : null;
 
         public void ReloadSkins()
         {
@@ -319,7 +319,11 @@ namespace VehicleSkins.Singleton
                         lod: lodMaterial,
                         wtsLayoutId: wtsLayoutId,
                         defaultActive: !disabledSkins.Contains(group.Key)
-                    ); ;
+                    );
+                    if (SceneUtils.IsAssetEditor && assetName.Contains('.'))
+                    {
+                        m_skins[assetName.Split('.').Last()] = m_skins[assetName];
+                    }
                 }
 
             }
@@ -409,15 +413,15 @@ namespace VehicleSkins.Singleton
             material = null;
             if (m_skins.TryGetValue(info.name, out var skinData))
             {
-                if (VSBaseLiteUI.Instance.Visible && SceneUtils.IsAssetEditor && !VSBaseLiteUI.Instance.Minimized)
-                {
-                    return VSBaseLiteUI.Instance.GrabbedTargetSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);
-                }
                 if (ModInstance.Controller.ConnectorWE.IsWEVehicleEditorOpen
                     && ModInstance.Controller.ConnectorWE.CurrentFocusVehicle == vehicleId
                     && !isParked)
                 {
                     return ModInstance.Controller.ConnectorWE.CurrentSelectionSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);
+                }
+                if (SceneUtils.IsAssetEditor && VSBaseLiteUI.Instance.Visible)
+                {
+                    return VSBaseLiteUI.Instance.GrabbedTargetSkin is string skinNameOverride && skinData.TryGetValue(skinNameOverride, out material);
                 }
                 if (VSBaseLiteUI.Instance.Visible
                  //&& VSBaseLiteUI.LockSelection 
