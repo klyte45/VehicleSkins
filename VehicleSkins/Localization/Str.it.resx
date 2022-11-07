@@ -194,4 +194,7 @@ Vedi i file nella cartella, editali e ricarica in gioco per vedere le modifiche 
   <data name="vs_forceSkinInCurrentSelectedVehicle" xml:space="preserve">
     <value>Forza la skin nel veicolo selezionato</value>
   </data>
+  <data name="vs_vsStillLoadingSkins" xml:space="preserve">
+    <value>Vehicle Skins is loading skins...</value>
+  </data>
 </root>
