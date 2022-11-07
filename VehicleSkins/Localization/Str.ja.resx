@@ -194,4 +194,7 @@
   <data name="vs_forceSkinInCurrentSelectedVehicle" xml:space="preserve">
     <value>現在、選択中の車両にスキンを強制的に適用</value>
   </data>
+  <data name="vs_vsStillLoadingSkins" xml:space="preserve">
+    <value>Vehicle Skins is loading skins...</value>
+  </data>
 </root>
