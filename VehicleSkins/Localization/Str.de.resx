@@ -195,6 +195,6 @@ Dateien befinden sich im Ordner, bearbeite sie und lade sie im Spiel neu, um die
     <value>Skin im aktuell ausgewählten Fahrzeug erzwingen</value>
   </data>
   <data name="vs_vsStillLoadingSkins" xml:space="preserve">
-    <value>Vehicle Skins is loading skins...</value>
+    <value>Vehicle Skins lädt die Skins...</value>
   </data>
 </root>
