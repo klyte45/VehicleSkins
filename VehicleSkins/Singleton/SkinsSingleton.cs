@@ -182,14 +182,17 @@ namespace VehicleSkins.Singleton
                         foreach (var trailer in vi.m_trailers)
                         {
                             yield return LoadFromWorkshopAssetFolder(trailer.m_info);
+                            yield return 0;
                         }
                     }
+                    yield return 0;
                 }
             }
             LogUtils.DoWarnLog($"Found {models.Length} folders for skins:\n{string.Join("\n", models)}");
             foreach (string folder in models)
             {
                 yield return LoadFromFolder(folder, PrefabCollection<VehicleInfo>.FindLoaded(Path.GetFileName(folder)), Source.SHARED);
+                yield return 0;
             }
 
             m_cachedSkins.Clear();
@@ -325,7 +328,7 @@ namespace VehicleSkins.Singleton
                         m_skins[assetName.Split('.').Last()] = m_skins[assetName];
                     }
                 }
-
+                yield return 0;
             }
 
         }

@@ -10,7 +10,7 @@ using VehicleSkins.Localization;
 using VehicleSkins.Singleton;
 using VehicleSkins.UI;
 
-[assembly: AssemblyVersion("1.1.0.2")]
+[assembly: AssemblyVersion("1.1.0.3")]
 namespace VehicleSkins
 {
     public class ModInstance : BasicIUserMod<ModInstance, VSMainController>

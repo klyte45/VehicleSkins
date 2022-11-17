@@ -8,3 +8,6 @@ In this version the news are:
 - Added a field to select the skin to be previewed
 - Mod rewritten in new Kwytto Framework
 - Fixed support to the Asset Editor
+
+<color=green>r3 (17/NOV/22)</color>
+- Reduced slowness when just loading a city
