@@ -171,7 +171,6 @@ namespace VehicleSkins.Singleton
 
         private IEnumerator ReloadSkins_Coroutine()
         {
-            var models = Directory.GetDirectories(VSMainController.SKINS_FOLDER);
             foreach (var vehicleInfo in VehiclesIndexes.instance.PrefabsData.Values)
             {
                 if (vehicleInfo.Info is VehicleInfo vi)
@@ -188,6 +187,7 @@ namespace VehicleSkins.Singleton
                     yield return 0;
                 }
             }
+            var models = Directory.GetDirectories(VSMainController.SKINS_FOLDER);
             LogUtils.DoWarnLog($"Found {models.Length} folders for skins:\n{string.Join("\n", models)}");
             foreach (string folder in models)
             {
@@ -216,6 +216,7 @@ namespace VehicleSkins.Singleton
             if (info is null || !Directory.Exists(folder))
             {
                 LogUtils.DoLog($"Folder doesn't exists for asset '{info}': {folder}");
+                yield return 0;
                 yield break;
             }
             var assetName = info.name;

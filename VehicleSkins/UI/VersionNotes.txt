@@ -11,3 +11,7 @@ In this version the news are:
 
 <color=green>r3 (17/NOV/22)</color>
 - Reduced slowness when just loading a city
+
+<color=green>r4 (18/NOV/22)</color>
+- Fixed UI scale in non-1080p based resolutions
+- Reduced a little more the slowness when just loading a city
