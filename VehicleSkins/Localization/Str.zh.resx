@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="root_modDescription" xml:space="preserve">
-    <value>Multiplies vehicles skins possibilities</value>
+    <value>可以增加或选择多个车辆皮肤</value>
   </data>
   <data name="VS_MODELSELECT" xml:space="preserve">
-    <value>Select model</value>
+    <value>选择型号</value>
   </data>
   <data name="VS_THEREARENOSKINS" xml:space="preserve">
     <value>There are no skins loaded for this vehicle model</value>
