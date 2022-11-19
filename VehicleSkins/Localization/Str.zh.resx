@@ -118,83 +118,83 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="root_modDescription" xml:space="preserve">
-    <value>可以增加或选择多个车辆皮肤</value>
+    <value>可以增加或选择多个车辆外观</value>
   </data>
   <data name="VS_MODELSELECT" xml:space="preserve">
     <value>选择型号</value>
   </data>
   <data name="VS_THEREARENOSKINS" xml:space="preserve">
-    <value>There are no skins loaded for this vehicle model</value>
+    <value>没有为这辆车加载外观</value>
   </data>
   <data name="VS_CREATENEWSKIN" xml:space="preserve">
-    <value>Create new skin</value>
+    <value>创建新外观</value>
   </data>
   <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">
-    <value>Type the new skin name:</value>
+    <value>输入新外观名称：</value>
   </data>
   <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
-    <value>&lt;color=yellow&gt;There's already a skin with this name!&lt;/color&gt;</value>
+    <value>&lt;color=yellow&gt;已经有这个名字的外观了！&lt;/color&gt;</value>
   </data>
   <data name="VS_RELOADALLSKINS" xml:space="preserve">
-    <value>Reload all skins</value>
+    <value>重新加载所有外观</value>
   </data>
   <data name="VS_RELOADASSETSKINS" xml:space="preserve">
-    <value>Reload all skins from current asset</value>
+    <value>重新加载当前资产中的所有外观</value>
   </data>
   <data name="VS_ACTIVERULESONLY" xml:space="preserve">
-    <value>Filter assets having at least one skin</value>
+    <value>筛选至少有一个外观的资产</value>
   </data>
   <data name="VS_EXPORTTOASSET_TITLE" xml:space="preserve">
-    <value>Export shared skins to upload to Workshop</value>
+    <value>导出载具外观上传到创意工坊。</value>
   </data>
   <data name="VS_EXPORTTOASSET_MSG" xml:space="preserve">
-    <value>Do you want to erase all skins already exported to workshop?
-Note the ones with the same name will be overwritten anyway   </value>
+    <value>你想要擦除所有已经导出到创意工坊的载具外观吗？
+注意具有相同名称的载具外观无论如何都会被覆盖。   </value>
   </data>
   <data name="VS_EXPORTASSET" xml:space="preserve">
-    <value>Export shared to workshop</value>
+    <value>导出共享到创意工坊</value>
   </data>
   <data name="VS_EXPORTTOASSET_MSGSUC" xml:space="preserve">
-    <value>Files exported to be uploaded successfully!</value>
+    <value>文件已导出并成功上传！</value>
   </data>
   <data name="VS_VIEWFILES" xml:space="preserve">
-    <value>Open files folder</value>
+    <value>打开文件夹</value>
   </data>
   <data name="VS_SOURCECOLOR_LEGEND" xml:space="preserve">
-    <value>Skin source legend: &lt;color=gray&gt;Original skin&lt;/color&gt; &lt;color=green&gt;Workshop/Staging&lt;/color&gt; &lt;color=yellow&gt;Shared Folder&lt;/color&gt;</value>
+    <value>外观来源图示： &lt;color=gray&gt;原始外观&lt;/color&gt; &lt;color=green&gt;创意工坊/缓存&lt;/color&gt; &lt;color=yellow&gt;共享文件夹&lt;/color&gt;</value>
   </data>
   <data name="VS_CREATESKIN_MSGSUC" xml:space="preserve">
-    <value>Skin files created!
-See files in the folder, edit them and reload in game to see the changes   </value>
+    <value>外观文件已创建！
+查看文件，编辑它们并在游戏中重新加载以查看更改   </value>
   </data>
   <data name="VS_USINGSAVEGAMECONFIG" xml:space="preserve">
-    <value>Using savegame config</value>
+    <value>使用保存配置</value>
   </data>
   <data name="VS_USINGSHAREDCONFIG" xml:space="preserve">
-    <value>Using shared config</value>
+    <value>使用共享配置</value>
   </data>
   <data name="VS_EXPORTASSHARED" xml:space="preserve">
-    <value>Export current to shared</value>
+    <value>导出当前为共享</value>
   </data>
   <data name="VS_DISCARDSAVEGAME" xml:space="preserve">
-    <value>Discard and use shared</value>
+    <value>放弃并使用共享的</value>
   </data>
   <data name="VS_DEFAULTSNOTSAVED" xml:space="preserve">
-    <value>&lt;color=red&gt;Skins enabled by default selection is not saved!&lt;/color&gt;</value>
+    <value>&lt;color=red&gt;默认选择启用的外观未保存！&lt;/color&gt;</value>
   </data>
   <data name="VS_DEFAULTSSAVED" xml:space="preserve">
-    <value>Skins enabled by default are up to date with the file</value>
+    <value>默认启用的外观是文件的最新版本</value>
   </data>
   <data name="VS_SAVESKINENABLESELECTION" xml:space="preserve">
-    <value>Save skins enabled by default</value>
+    <value>默认情况下已启用保存的外观</value>
   </data>
   <data name="VS_DISCARDCHANGES" xml:space="preserve">
-    <value>Discard changes</value>
+    <value>放弃更改</value>
   </data>
   <data name="vs_forceSkinInCurrentSelectedVehicle" xml:space="preserve">
-    <value>Force skin in current selected vehicle</value>
+    <value>在当前选定的车辆中强制替换蒙皮</value>
   </data>
   <data name="vs_vsStillLoadingSkins" xml:space="preserve">
-    <value>Vehicle Skins is loading skins...</value>
+    <value>Vehicle Skins 正在加载车辆蒙皮...</value>
   </data>
 </root>
