@@ -1,11 +1,14 @@
 
 using ColossalFramework;
+using ColossalFramework.Threading;
+using ColossalFramework.UI;
 using Kwytto.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 using VehicleSkins.Data;
 using VehicleSkins.UI;
@@ -15,7 +18,7 @@ namespace VehicleSkins.Singleton
 {
     public class SkinsSingleton : Singleton<SkinsSingleton>
     {
-        public class MaterialContainer
+        public class MaterialContainer : IDisposable
         {
             public enum Source
             {
@@ -78,6 +81,12 @@ namespace VehicleSkins.Singleton
                 this.defaultActive = defaultActive;
                 this.source = source;
             }
+
+            public void Dispose()
+            {
+                Destroy(main);
+                Destroy(lod);
+            }
         }
 
         public const string XYS_MAP = "_XYSMap";
@@ -96,6 +105,7 @@ namespace VehicleSkins.Singleton
         public bool IsLoading => m_reloadCoroutine != null;
 
         private Coroutine m_reloadCoroutine;
+        private static ActionThread m_reloadThread;
         public event Action OnReloadCoroutineDone;
 
         internal void DiscardLocal(VehicleInfo info)
@@ -147,7 +157,7 @@ namespace VehicleSkins.Singleton
             }
         }
 
-        private readonly Dictionary<string, Dictionary<string, MaterialContainer>> m_skins = new Dictionary<string, Dictionary<string, MaterialContainer>>();
+        private Dictionary<string, Dictionary<string, MaterialContainer>> m_skins = new Dictionary<string, Dictionary<string, MaterialContainer>>();
         internal string[] GetAvailableSkins(VehicleInfo info) => m_skins.TryGetValue(info.name, out var skins) ? skins.Keys.OrderBy(x => x).ToArray() : (new string[0]);
         internal MaterialContainer[] GetAvailableSkinsMaterial(VehicleInfo info) => GetAvailableSkinsMaterial(info.name);
         internal MaterialContainer[] GetAvailableSkinsMaterial(string assetName) => m_skins.TryGetValue(assetName, out var skins) ? skins.Values.ToArray() : (new MaterialContainer[0]);
@@ -155,46 +165,30 @@ namespace VehicleSkins.Singleton
         internal bool HasSkins(VehicleInfo info) => m_skins.TryGetValue(info.name, out var skins) && skins.Count > 1;
 
         public string GetDirectoryForAssetShared(PrefabInfo info) => Path.Combine(VSMainController.SKINS_FOLDER, info.name);
-        public string GetDirectoryForAssetOwn(PrefabInfo info) => KFileUtils.GetRootFolderForK45(info) is string str ? Path.Combine(Path.Combine(str, VSMainController.EXTRA_SPRITES_FILES_FOLDER_ASSETS), PrefabUtils.GetAssetFromPrefab(info).name.Split('.').Last()) : null;
+        public static string GetDirectoryForAssetOwn(PrefabInfo info) => KFileUtils.GetRootFolderForK45(info) is string str ? Path.Combine(Path.Combine(str, VSMainController.EXTRA_SPRITES_FILES_FOLDER_ASSETS), PrefabUtils.GetAssetFromPrefab(info).name.Split('.').Last()) : null;
 
         public void ReloadSkins()
         {
             if (!(m_reloadCoroutine is null))
             {
-                StopCoroutine(m_reloadCoroutine);
+                return;
             }
-            m_skins.Clear();
-            m_cachedSkins.Clear();
-            ModInstance.Controller.ConnectorWE.ClearWELayoutRegisters();
             m_reloadCoroutine = StartCoroutine(ReloadSkins_Coroutine());
         }
 
         private IEnumerator ReloadSkins_Coroutine()
         {
-            foreach (var vehicleInfo in VehiclesIndexes.instance.PrefabsData.Values)
+            if (!(m_reloadThread is null))
             {
-                if (vehicleInfo.Info is VehicleInfo vi)
-                {
-                    yield return LoadFromWorkshopAssetFolder(vi);
-                    if (vi.m_trailers != null)
-                    {
-                        foreach (var trailer in vi.m_trailers)
-                        {
-                            yield return LoadFromWorkshopAssetFolder(trailer.m_info);
-                            yield return 0;
-                        }
-                    }
-                    yield return 0;
-                }
+                yield break;
             }
-            var models = Directory.GetDirectories(VSMainController.SKINS_FOLDER);
-            LogUtils.DoWarnLog($"Found {models.Length} folders for skins:\n{string.Join("\n", models)}");
-            foreach (string folder in models)
-            {
-                yield return LoadFromFolder(folder, PrefabCollection<VehicleInfo>.FindLoaded(Path.GetFileName(folder)), Source.SHARED);
-                yield return 0;
-            }
-
+            ModInstance.Controller.ConnectorWE.ClearWELayoutRegisters();
+            var targetSkins = new Dictionary<string, Dictionary<string, MaterialContainer>>();
+            var prefabs = VehiclesIndexes.instance.PrefabsData;
+            m_reloadThread = ThreadHelper.CreateThread(() => ReloadSkins_Thread(prefabs, targetSkins));
+            yield return new WaitWhile(() => m_reloadThread != null);
+            m_skins.Values.ForEach(x => x.Values.ForEach(y => y.Dispose()));
+            m_skins = targetSkins;
             m_cachedSkins.Clear();
             OnReloadCoroutineDone?.Invoke();
             VSBaseLiteUI.Instance.Reset();
@@ -202,25 +196,69 @@ namespace VehicleSkins.Singleton
             m_reloadCoroutine = null;
         }
 
-        private IEnumerator LoadFromWorkshopAssetFolder(VehicleInfo vehicleInfo)
+        private static void ReloadSkins_Thread(Dictionary<string, IIndexedPrefabData> prefabsData, Dictionary<string, Dictionary<string, MaterialContainer>> m_skins)
         {
+            foreach (var vehicleInfo in prefabsData.Values)
+            {
+                if (vehicleInfo.Info is VehicleInfo vi)
+                {
+                    LoadFromWorkshopAssetFolder(vi, m_skins);
+                    if (vi.m_trailers != null)
+                    {
+                        foreach (var trailer in vi.m_trailers)
+                        {
+                            LoadFromWorkshopAssetFolder(trailer.m_info, m_skins);
+                        }
+                    }
+                }
+            }
+            var models = Directory.GetDirectories(VSMainController.SKINS_FOLDER);
+            Dispatcher.main.Dispatch(() => LogUtils.DoInfoLog($"Found {models.Length} folders for skins"));
+            foreach (string folderFull in models)
+            {
+                var vehicleName = Path.GetFileName(folderFull);
+                Dispatcher.main.Dispatch(() => LogUtils.DoInfoLog($"Trying load folder {vehicleName}"));
+                if (prefabsData.TryGetValue(vehicleName, out var data))
+                {
+                    LoadFromFolder(folderFull, data.Info as VehicleInfo, Source.SHARED, m_skins);
+                    Dispatcher.main.Dispatch(() => LogUtils.DoInfoLog($"Folder {vehicleName} loaded"));
+                }
+                else
+                {
+                    Dispatcher.main.Dispatch(() => LogUtils.DoErrorLog($"Folder {vehicleName} failed! Info not found!"));
+                }
+            }
+
+            m_reloadThread = null;
+            Dispatcher.main.Dispatch(() =>
+            {
+                LogUtils.DoInfoLog($"Scan thread ended!");
+                LogUtils.FlushBuffer();
+            });
+
+        }
+
+        private static void LoadFromWorkshopAssetFolder(VehicleInfo vehicleInfo, Dictionary<string, Dictionary<string, MaterialContainer>> m_skins)
+        {
+            Dispatcher.main.Dispatch(() => LogUtils.DoInfoLog($"Scanning {vehicleInfo} asset files!"));
             var assetFolder = GetDirectoryForAssetOwn(vehicleInfo);
             if (assetFolder.TrimToNull() != null)
             {
-                yield return LoadFromFolder(assetFolder, vehicleInfo, Source.WORKSHOP);
+                LoadFromFolder(assetFolder, vehicleInfo, Source.WORKSHOP, m_skins);
             }
         }
 
-        private IEnumerator LoadFromFolder(string folder, VehicleInfo info, Source source)
+        private static void LoadFromFolder(string folder, VehicleInfo info, Source source, Dictionary<string, Dictionary<string, MaterialContainer>> m_skins)
         {
             if (info is null || !Directory.Exists(folder))
             {
-                LogUtils.DoLog($"Folder doesn't exists for asset '{info}': {folder}");
-                yield return 0;
-                yield break;
+                if (ModInstance.DebugMode)
+                    Dispatcher.main.Dispatch(() => LogUtils.DoLog($"Folder doesn't exists for asset '{info}': {folder}"));
+                return;
             }
             var assetName = info.name;
-            LogUtils.DoWarnLog($"Processing {assetName} @ {folder}");
+            if (ModInstance.DebugMode)
+                Dispatcher.main.Dispatch(() => LogUtils.DoLog($"Processing {assetName} @ {folder}"));
             if (source == Source.WORKSHOP || !m_skins.ContainsKey(assetName))
             {
                 m_skins[assetName] = new Dictionary<string, MaterialContainer>();
@@ -250,8 +288,12 @@ namespace VehicleSkins.Singleton
             foreach (var group in fileGroups)
             {
                 bool hasLodFiles = group.Any(x => x.Third.EndsWith("Lod.png"));
-                var normalMaterial = new Material(baseMaterial);
-                var lodMaterial = new Material(baseLodMaterial);
+                Material normalMaterial = null, lodMaterial = null;
+                Dispatcher.main.Dispatch(() =>
+                {
+                    normalMaterial = new Material(baseMaterial);
+                    lodMaterial = new Material(baseLodMaterial);
+                });
                 bool hasAnyValidFile = false;
                 var wtsLayoutId = -1;
                 foreach (var subFile in group)
@@ -260,7 +302,7 @@ namespace VehicleSkins.Singleton
                     var filePath = Path.Combine(folder, subFile.First);
                     if (subFile.First.EndsWith(".png"))
                     {
-                        var tex = TextureAtlasUtils.LoadTextureFromFile(filePath, linear: false);
+                        Texture2D tex = Dispatcher.main.Dispatch(() => TextureAtlasUtils.LoadTextureFromFile(filePath, linear: false)).result;
                         if (tex is null)
                         {
                             continue;
@@ -304,11 +346,10 @@ namespace VehicleSkins.Singleton
                         switch (subFile.Third)
                         {
                             case WE_FILESUFFIX:
-                                wtsLayoutId = ModInstance.Controller.ConnectorWE.RegisterWELayout(File.ReadAllText(filePath));
+                                wtsLayoutId = ReadWEFile(wtsLayoutId, filePath);
                                 break;
                         }
                     }
-                    yield return 0;
                 }
                 if (hasAnyValidFile)
                 {
@@ -324,22 +365,51 @@ namespace VehicleSkins.Singleton
                         wtsLayoutId: wtsLayoutId,
                         defaultActive: !disabledSkins.Contains(group.Key)
                     );
-                    if (SceneUtils.IsAssetEditor && assetName.Contains('.'))
+                    Dispatcher.main.Dispatch(() =>
                     {
-                        m_skins[assetName.Split('.').Last()] = m_skins[assetName];
-                    }
+                        if (SceneUtils.IsAssetEditor && assetName.Contains('.'))
+                        {
+                            m_skins[assetName.Split('.').Last()] = m_skins[assetName];
+                        }
+                    });
                 }
-                yield return 0;
             }
 
         }
 
+        private static int ReadWEFile(int wtsLayoutId, string filePath)
+        {
+            bool hasEnded = false;
+            var task = Dispatcher.main.Dispatch(() => ModInstance.Controller.ConnectorWE.RegisterWELayout(File.ReadAllText(filePath)));
+            task.WhenEnded(() => hasEnded = true);
+            var maxWait = 20;
+            var wait = 0;
+            do
+            {
+                Thread.Sleep(100);
+            } while (!hasEnded && wait++ < maxWait);
+            if (task.hasSucceeded)
+            {
+                wtsLayoutId = task.result;
+            }
+
+            return wtsLayoutId;
+        }
+
         public IEnumerator RealoadSkinsOfInfo(VehicleInfo info, Action callback = null)
         {
-            yield return LoadFromFolder(GetDirectoryForAssetOwn(info), info, Source.WORKSHOP);
+            yield return 0;
+            var targetSkins = new Dictionary<string, Dictionary<string, MaterialContainer>>();
+            var thread = ThreadHelper.CreateThread(() => LoadFromFolder(GetDirectoryForAssetOwn(info), info, Source.WORKSHOP, targetSkins));
+            yield return new WaitWhile(() => thread.isAlive);
             if (!SceneUtils.IsAssetEditor)
             {
-                yield return LoadFromFolder(GetDirectoryForAssetShared(info), info, Source.SHARED);
+                thread = ThreadHelper.CreateThread(() => LoadFromFolder(GetDirectoryForAssetShared(info), info, Source.SHARED, targetSkins));
+                yield return new WaitWhile(() => thread.isAlive);
+            }
+            foreach (var skinId in targetSkins.Keys)
+            {
+                m_skins[skinId] = targetSkins[skinId];
             }
             m_cachedSkins.Clear();
             callback?.Invoke();

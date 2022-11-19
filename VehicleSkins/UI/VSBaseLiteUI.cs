@@ -207,7 +207,7 @@ namespace VehicleSkins.UI
                     CurrentTab = 0;
                     if (SceneUtils.IsAssetEditor)
                     {
-                        m_isPackageLoaded = SkinsSingleton.instance.GetDirectoryForAssetOwn(m_currentInfo) != null;
+                        m_isPackageLoaded = SkinsSingleton.GetDirectoryForAssetOwn(m_currentInfo) != null;
                     }
 
                 }

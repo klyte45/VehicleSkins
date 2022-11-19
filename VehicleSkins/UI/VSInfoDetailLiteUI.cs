@@ -244,7 +244,7 @@ namespace VehicleSkins.UI
         private void DoExportShared() => SkinsSingleton.instance.ExportCurrentAsShared(m_currentInfo);
         private void DoExportAsset()
         {
-            if (Directory.Exists(SkinsSingleton.instance.GetDirectoryForAssetOwn(m_currentInfo)))
+            if (Directory.Exists(SkinsSingleton.GetDirectoryForAssetOwn(m_currentInfo)))
             {
                 KwyttoDialog.ShowModal(new KwyttoDialog.BindProperties
                 {
@@ -285,7 +285,7 @@ namespace VehicleSkins.UI
                     KwyttoDialog.SpaceBtn,
                     new KwyttoDialog.ButtonDefinition
                     {
-                        onClick = () => { Utils.OpenInFileBrowser(SkinsSingleton.instance.GetDirectoryForAssetOwn(m_currentInfo)); return true; },
+                        onClick = () => { Utils.OpenInFileBrowser(SkinsSingleton.GetDirectoryForAssetOwn(m_currentInfo)); return true; },
                         title = Str.VS_VIEWFILES,
                     },
                     new KwyttoDialog.ButtonDefinition
