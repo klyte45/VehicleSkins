@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,5 +117,84 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
- 
+  <data name="root_modDescription" xml:space="preserve">
+    <value>可以增加或选择多个车辆外观</value>
+  </data>
+  <data name="VS_MODELSELECT" xml:space="preserve">
+    <value>选择型号</value>
+  </data>
+  <data name="VS_THEREARENOSKINS" xml:space="preserve">
+    <value>没有为这辆车加载外观</value>
+  </data>
+  <data name="VS_CREATENEWSKIN" xml:space="preserve">
+    <value>创建新外观</value>
+  </data>
+  <data name="VS_CREATESKIN_MESSAGE" xml:space="preserve">
+    <value>输入新外观名称：</value>
+  </data>
+  <data name="VS_CREATESKIN_ERROR_ALREADYEXISTS" xml:space="preserve">
+    <value>&lt;color=yellow&gt;已经有这个名字的外观了！&lt;/color&gt;</value>
+  </data>
+  <data name="VS_RELOADALLSKINS" xml:space="preserve">
+    <value>重新加载所有外观</value>
+  </data>
+  <data name="VS_RELOADASSETSKINS" xml:space="preserve">
+    <value>重新加载当前资产中的所有外观</value>
+  </data>
+  <data name="VS_ACTIVERULESONLY" xml:space="preserve">
+    <value>筛选至少有一个外观的资产</value>
+  </data>
+  <data name="VS_EXPORTTOASSET_TITLE" xml:space="preserve">
+    <value>导出载具外观上传到创意工坊。</value>
+  </data>
+  <data name="VS_EXPORTTOASSET_MSG" xml:space="preserve">
+    <value>你想要擦除所有已经导出到创意工坊的载具外观吗？
+注意具有相同名称的载具外观无论如何都会被覆盖。   </value>
+  </data>
+  <data name="VS_EXPORTASSET" xml:space="preserve">
+    <value>导出共享到创意工坊</value>
+  </data>
+  <data name="VS_EXPORTTOASSET_MSGSUC" xml:space="preserve">
+    <value>文件已导出并成功上传！</value>
+  </data>
+  <data name="VS_VIEWFILES" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="VS_SOURCECOLOR_LEGEND" xml:space="preserve">
+    <value>外观来源图示： &lt;color=gray&gt;原始外观&lt;/color&gt; &lt;color=green&gt;创意工坊/缓存&lt;/color&gt; &lt;color=yellow&gt;共享文件夹&lt;/color&gt;</value>
+  </data>
+  <data name="VS_CREATESKIN_MSGSUC" xml:space="preserve">
+    <value>外观文件已创建！
+查看文件，编辑它们并在游戏中重新加载以查看更改   </value>
+  </data>
+  <data name="VS_USINGSAVEGAMECONFIG" xml:space="preserve">
+    <value>使用保存配置</value>
+  </data>
+  <data name="VS_USINGSHAREDCONFIG" xml:space="preserve">
+    <value>使用共享配置</value>
+  </data>
+  <data name="VS_EXPORTASSHARED" xml:space="preserve">
+    <value>导出当前为共享</value>
+  </data>
+  <data name="VS_DISCARDSAVEGAME" xml:space="preserve">
+    <value>放弃并使用共享的</value>
+  </data>
+  <data name="VS_DEFAULTSNOTSAVED" xml:space="preserve">
+    <value>&lt;color=red&gt;默认选择启用的外观未保存！&lt;/color&gt;</value>
+  </data>
+  <data name="VS_DEFAULTSSAVED" xml:space="preserve">
+    <value>默认启用的外观是文件的最新版本</value>
+  </data>
+  <data name="VS_SAVESKINENABLESELECTION" xml:space="preserve">
+    <value>默认情况下已启用保存的外观</value>
+  </data>
+  <data name="VS_DISCARDCHANGES" xml:space="preserve">
+    <value>放弃更改</value>
+  </data>
+  <data name="vs_forceSkinInCurrentSelectedVehicle" xml:space="preserve">
+    <value>在当前选定的车辆中强制替换蒙皮</value>
+  </data>
+  <data name="vs_vsStillLoadingSkins" xml:space="preserve">
+    <value>Vehicle Skins 正在加载车辆蒙皮...</value>
+  </data>
 </root>

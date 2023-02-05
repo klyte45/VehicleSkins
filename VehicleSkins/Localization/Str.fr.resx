@@ -194,4 +194,7 @@ Vous pouvez voir les fichiers dans le dossier, les modifier et les recharger dan
   <data name="vs_forceSkinInCurrentSelectedVehicle" xml:space="preserve">
     <value>Forcer le skin dans le véhicule sélectionné</value>
   </data>
+  <data name="vs_vsStillLoadingSkins" xml:space="preserve">
+    <value>Vehicle Skins is loading skins...</value>
+  </data>
 </root>
