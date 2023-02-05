@@ -10,7 +10,7 @@ using VehicleSkins.Localization;
 using VehicleSkins.Singleton;
 using VehicleSkins.UI;
 
-[assembly: AssemblyVersion("1.1.0.5")]
+[assembly: AssemblyVersion("1.1.0.*")]
 namespace VehicleSkins
 {
     public class ModInstance : BasicIUserMod<ModInstance, VSMainController>
@@ -33,7 +33,7 @@ namespace VehicleSkins
             new UUIWindowButtonContainerPlaceholder(
                 buttonName: Instance.SimpleName,
                 tooltip: Instance.GeneralName,
-                iconPath: "ModIcon",
+                iconPath: "ModIcon_NoBG",
                 windowGetter: ()=>VSBaseLiteUI.Instance
              )
         });
