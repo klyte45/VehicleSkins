@@ -1,6 +1,19 @@
 <color=yellow>Welcome to Vehicle Skins 1.1!</color>
 
-In this version the news are:
+<color=green>r6 (05/FEB/23)</color>
+- Added strings for languages: de, es, fr, it, ja, ko, pl, pt, ru, th & zh. Feel free to propose fix for any issue found in translations at Crowdin!
+- Fixed issue related to the mod making the default skin to be erased, causing Null Pointers and invisible vehicles on vanilla models
+- Added new loading UI, now shows the current statuses of the loading process
+- New UI, now following game style
+- New Icon, now preserving the Unified UI button background
+- Now it's possible to choose the font of the mod windows. Defaults to be the game or OS default font depending on game build
+- Fixed mouse raytracing passing through the mod UI when scale was different of 100%
+- Other minor UI fixes
+
+NOTE: The UI changes will be applied to other mods in near future.
+
+
+Previously in 1.1:
 
 - Added integration with Write Everywhere
 - Added integration with Custom Data Mod to force a skin for all vehicles from a building
@@ -8,13 +21,8 @@ In this version the news are:
 - Added a field to select the skin to be previewed
 - Mod rewritten in new Kwytto Framework
 - Fixed support to the Asset Editor
-
-<color=green>r3 (17/NOV/22)</color>
+- Fixed the slowness when just loading a city
 - Reduced slowness when just loading a city
-
-<color=green>r4 (18/NOV/22)</color>
 - Fixed UI scale in non-1080p based resolutions
 - Reduced a little more the slowness when just loading a city
 
-<color=green>r5 (19/NOV/22)</color>
-- Fixed the slowness when just loading a city

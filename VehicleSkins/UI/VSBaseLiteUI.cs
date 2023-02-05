@@ -225,6 +225,11 @@ namespace VehicleSkins.UI
             var area = new Rect(default, size);
             using (new GUILayout.AreaScope(area))
             {
+                if (SkinsSingleton.instance.IsLoading)
+                {
+                    GUILayout.Label(Str.vs_vsStillLoadingSkins + "\n" + SkinsSingleton.LastStatusReloading);
+                    return;
+                }
                 switch (m_currentState)
                 {
                     case State.Normal:
@@ -257,18 +262,19 @@ namespace VehicleSkins.UI
             else
             {
                 m_modelFilter.DrawButton(size.x, inf?.GetUncheckedLocalizedTitle(), true);
+                if (GUILayout.Button(Str.VS_RELOADALLSKINS) && !SkinsSingleton.instance.IsLoading)
+                {
+                    Reset();
+                    SkinsSingleton.instance.ReloadSkins();
+                }
             }
 
             if (inf)
             {
-                var headerArea = new Rect(0, 25, size.x, 50); ;
+                var headerArea = new Rect(0, 50, size.x, 25); ;
                 var bodyArea = new Rect(0, 75, size.x, size.y - 75);
                 using (new GUILayout.AreaScope(headerArea))
                 {
-                    if (!isAssetEditor && GUILayout.Button(Str.VS_RELOADALLSKINS))
-                    {
-                        SkinsSingleton.instance.ReloadSkins();
-                    }
                     using (var scope = new GUILayout.ScrollViewScope(m_horizontalScroll))
                     {
                         CurrentTab = GUILayout.SelectionGrid(CurrentTab, m_currentInfoList.Select((_, i) => i == 0 ? "Head" : $"Trailer {i}").ToArray(), m_currentInfoList.Count, GUILayout.MinWidth(40));

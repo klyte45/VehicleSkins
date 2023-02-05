@@ -18,6 +18,7 @@ namespace VehicleSkins.Singleton
 {
     public class SkinsSingleton : Singleton<SkinsSingleton>
     {
+        public static string LastStatusReloading { get; private set; }
         public class MaterialContainer : IDisposable
         {
             public enum Source
@@ -182,83 +183,124 @@ namespace VehicleSkins.Singleton
             {
                 yield break;
             }
-            ModInstance.Controller.ConnectorWE.ClearWELayoutRegisters();
-            var targetSkins = new Dictionary<string, Dictionary<string, MaterialContainer>>();
-            var prefabs = VehiclesIndexes.instance.PrefabsData;
-            m_reloadThread = ThreadHelper.CreateThread(() => ReloadSkins_Thread(prefabs, targetSkins));
-            yield return new WaitWhile(() => m_reloadThread != null);
-            m_skins.Values.ForEach(x => x.Values.ForEach(y => y.Dispose()));
-            m_skins = targetSkins;
+            m_skins.Values.ForEach(x => x.Where(y => y.Key != "").ForEach(y => y.Value.Dispose()));
             m_cachedSkins.Clear();
-            OnReloadCoroutineDone?.Invoke();
-            VSBaseLiteUI.Instance.Reset();
+            m_skins = new Dictionary<string, Dictionary<string, MaterialContainer>>();
+            try
+            {
+                ModInstance.Controller.ConnectorWE.ClearWELayoutRegisters();
+                var prefabs = VehiclesIndexes.instance.PrefabsData;
+                m_reloadThread = ThreadHelper.CreateThread(() => ReloadSkins_Thread(prefabs, m_skins));
+            }
+            catch (Exception e)
+            {
+                LogUtils.DoErrorLog("Error reloading skins! (top Block)\n" + e);
+
+                OnReloadCoroutineDone = null;
+                m_reloadCoroutine = null;
+                yield break;
+            }
+            yield return new WaitWhile(() => m_reloadThread != null);
+            try
+            {
+                m_cachedSkins.Clear();
+                OnReloadCoroutineDone?.Invoke();
+                VSBaseLiteUI.Instance.Reset();
+            }
+            catch (Exception e)
+            {
+                LogUtils.DoErrorLog("Error reloading skins! (bottom Block)\n" + e);
+            }
             OnReloadCoroutineDone = null;
             m_reloadCoroutine = null;
         }
 
         private static void ReloadSkins_Thread(Dictionary<string, IIndexedPrefabData> prefabsData, Dictionary<string, Dictionary<string, MaterialContainer>> m_skins)
         {
+            var counter = 0;
             foreach (var vehicleInfo in prefabsData.Values)
             {
+                counter++;
                 if (vehicleInfo.Info is VehicleInfo vi)
                 {
-                    LoadFromWorkshopAssetFolder(vi, m_skins);
+                    LoadFromWorkshopAssetFolder(vi, m_skins, counter, prefabsData.Values.Count);
                     if (vi.m_trailers != null)
                     {
                         foreach (var trailer in vi.m_trailers)
                         {
-                            LoadFromWorkshopAssetFolder(trailer.m_info, m_skins);
+                            LoadFromWorkshopAssetFolder(trailer.m_info, m_skins, counter, prefabsData.Values.Count);
                         }
                     }
                 }
             }
             var models = Directory.GetDirectories(VSMainController.SKINS_FOLDER);
-            Dispatcher.main.Dispatch(() => LogUtils.DoInfoLog($"Found {models.Length} folders for skins"));
+            Dispatcher.main.Dispatch(() => LogAndUpdateStatusInfo($"Found {models.Length} folders for skins"));
+            counter = 0;
             foreach (string folderFull in models)
             {
+                counter++;
                 var vehicleName = Path.GetFileName(folderFull);
-                Dispatcher.main.Dispatch(() => LogUtils.DoInfoLog($"Trying load folder {vehicleName}"));
-                if (prefabsData.TryGetValue(vehicleName, out var data))
+                try
                 {
-                    LoadFromFolder(folderFull, data.Info as VehicleInfo, Source.SHARED, m_skins);
-                    Dispatcher.main.Dispatch(() => LogUtils.DoInfoLog($"Folder {vehicleName} loaded"));
+                    Dispatcher.main.Dispatch(() => LogAndUpdateStatusInfo($"[{counter}/{models.Length}] Trying load folder {vehicleName}"));
+                    if (prefabsData.TryGetValue(vehicleName, out var data))
+                    {
+                        LoadFromFolder(folderFull, data.Info as VehicleInfo, Source.SHARED, m_skins, counter, models.Length);
+                        Dispatcher.main.Dispatch(() => LogAndUpdateStatusInfo($"[{counter}/{models.Length}] Folder {vehicleName} loaded"));
+                    }
+                    else
+                    {
+                        Dispatcher.main.Dispatch(() => LogErrorAndUpdateStatusInfo($"[{counter}/{models.Length}] Folder {vehicleName} failed! Info not found!"));
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    Dispatcher.main.Dispatch(() => LogUtils.DoErrorLog($"Folder {vehicleName} failed! Info not found!"));
+                    Dispatcher.main.Dispatch(() => LogErrorAndUpdateStatusInfo($"[{counter}/{models.Length}] Error while reading folder {vehicleName}: {e.Message}", e));
                 }
             }
 
             m_reloadThread = null;
             Dispatcher.main.Dispatch(() =>
             {
-                LogUtils.DoInfoLog($"Scan thread ended!");
+                LogAndUpdateStatusInfo($"Scan thread ended!");
                 LogUtils.FlushBuffer();
             });
 
         }
 
-        private static void LoadFromWorkshopAssetFolder(VehicleInfo vehicleInfo, Dictionary<string, Dictionary<string, MaterialContainer>> m_skins)
+        private static void LogAndUpdateStatusInfo(string status)
         {
-            Dispatcher.main.Dispatch(() => LogUtils.DoInfoLog($"Scanning {vehicleInfo} asset files!"));
+            LogUtils.DoInfoLog(status);
+            LastStatusReloading = status;
+        }
+
+        private static void LogErrorAndUpdateStatusInfo(string status, Exception e = null)
+        {
+            LogUtils.DoErrorLog(status + "\n" + e);
+            LastStatusReloading = $"<color=#FF0000>{status}</color>";
+        }
+
+        private static void LoadFromWorkshopAssetFolder(VehicleInfo vehicleInfo, Dictionary<string, Dictionary<string, MaterialContainer>> m_skins, int currentIdx, int total)
+        {
+            Dispatcher.main.Dispatch(() => LogAndUpdateStatusInfo($"[{currentIdx}/{total}] Scanning {vehicleInfo} asset files!"));
             var assetFolder = GetDirectoryForAssetOwn(vehicleInfo);
             if (assetFolder.TrimToNull() != null)
             {
-                LoadFromFolder(assetFolder, vehicleInfo, Source.WORKSHOP, m_skins);
+                LoadFromFolder(assetFolder, vehicleInfo, Source.WORKSHOP, m_skins, currentIdx, total);
             }
         }
 
-        private static void LoadFromFolder(string folder, VehicleInfo info, Source source, Dictionary<string, Dictionary<string, MaterialContainer>> m_skins)
+        private static void LoadFromFolder(string folder, VehicleInfo info, Source source, Dictionary<string, Dictionary<string, MaterialContainer>> m_skins, int currentIdx, int total)
         {
             if (info is null || !Directory.Exists(folder))
             {
                 if (ModInstance.DebugMode)
-                    Dispatcher.main.Dispatch(() => LogUtils.DoLog($"Folder doesn't exists for asset '{info}': {folder}"));
+                    Dispatcher.main.Dispatch(() => LogUtils.DoLog($"[{currentIdx}/{total}] Folder doesn't exists for asset '{info}': {folder}"));
                 return;
             }
             var assetName = info.name;
             if (ModInstance.DebugMode)
-                Dispatcher.main.Dispatch(() => LogUtils.DoLog($"Processing {assetName} @ {folder}"));
+                Dispatcher.main.Dispatch(() => LogUtils.DoLog($"[{currentIdx}/{total}] Processing {assetName} @ {folder}"));
             if (source == Source.WORKSHOP || !m_skins.ContainsKey(assetName))
             {
                 m_skins[assetName] = new Dictionary<string, MaterialContainer>();
@@ -400,11 +442,11 @@ namespace VehicleSkins.Singleton
         {
             yield return 0;
             var targetSkins = new Dictionary<string, Dictionary<string, MaterialContainer>>();
-            var thread = ThreadHelper.CreateThread(() => LoadFromFolder(GetDirectoryForAssetOwn(info), info, Source.WORKSHOP, targetSkins));
+            var thread = ThreadHelper.CreateThread(() => LoadFromFolder(GetDirectoryForAssetOwn(info), info, Source.WORKSHOP, targetSkins, 1, 1));
             yield return new WaitWhile(() => thread.isAlive);
             if (!SceneUtils.IsAssetEditor)
             {
-                thread = ThreadHelper.CreateThread(() => LoadFromFolder(GetDirectoryForAssetShared(info), info, Source.SHARED, targetSkins));
+                thread = ThreadHelper.CreateThread(() => LoadFromFolder(GetDirectoryForAssetShared(info), info, Source.SHARED, targetSkins, 1, 1));
                 yield return new WaitWhile(() => thread.isAlive);
             }
             foreach (var skinId in targetSkins.Keys)

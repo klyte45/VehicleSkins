@@ -40,12 +40,6 @@ namespace VehicleSkins.UI
 
         internal void DoDraw(Rect rect, VehicleInfo currentInfo, VehicleInfo parentInfo, int currentInfoIndex, int infoTrailersSize)
         {
-            if (SkinsSingleton.instance.IsLoading)
-            {
-                GUILayout.Label(Str.vs_vsStillLoadingSkins);
-                return;
-            }
-
             if (m_currentInfo != currentInfo)
             {
                 OnChangeInfo(currentInfo, parentInfo, infoTrailersSize);
