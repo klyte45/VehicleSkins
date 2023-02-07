@@ -217,54 +217,65 @@ namespace VehicleSkins.Singleton
 
         private static void ReloadSkins_Thread(Dictionary<string, IIndexedPrefabData> prefabsData, Dictionary<string, Dictionary<string, MaterialContainer>> m_skins)
         {
-            var counter = 0;
-            foreach (var vehicleInfo in prefabsData.Values)
+            try
             {
-                counter++;
-                if (vehicleInfo.Info is VehicleInfo vi)
+                var counter = 0;
+                foreach (var vehicleInfo in prefabsData.Values)
                 {
-                    LoadFromWorkshopAssetFolder(vi, m_skins, counter, prefabsData.Values.Count);
-                    if (vi.m_trailers != null)
+                    counter++;
+                    if (vehicleInfo.Info is VehicleInfo vi)
                     {
-                        foreach (var trailer in vi.m_trailers)
+                        LoadFromWorkshopAssetFolder(vi, m_skins, counter, prefabsData.Values.Count);
+                        if (vi.m_trailers != null)
                         {
-                            LoadFromWorkshopAssetFolder(trailer.m_info, m_skins, counter, prefabsData.Values.Count);
+                            foreach (var trailer in vi.m_trailers)
+                            {
+                                LoadFromWorkshopAssetFolder(trailer.m_info, m_skins, counter, prefabsData.Values.Count);
+                            }
                         }
                     }
                 }
-            }
-            var models = Directory.GetDirectories(VSMainController.SKINS_FOLDER);
-            Dispatcher.main.Dispatch(() => LogAndUpdateStatusInfo($"Found {models.Length} folders for skins"));
-            counter = 0;
-            foreach (string folderFull in models)
-            {
-                counter++;
-                var vehicleName = Path.GetFileName(folderFull);
-                try
+                KFileUtils.EnsureFolderCreation(VSMainController.SKINS_FOLDER);
+                var models = Directory.GetDirectories(VSMainController.SKINS_FOLDER);
+                Dispatcher.main.Dispatch(() => LogAndUpdateStatusInfo($"Found {models.Length} folders for skins"));
+                counter = 0;
+                foreach (string folderFull in models)
                 {
-                    Dispatcher.main.Dispatch(() => LogAndUpdateStatusInfo($"[{counter}/{models.Length}] Trying load folder {vehicleName}"));
-                    if (prefabsData.TryGetValue(vehicleName, out var data))
+                    counter++;
+                    var vehicleName = Path.GetFileName(folderFull);
+                    try
                     {
-                        LoadFromFolder(folderFull, data.Info as VehicleInfo, Source.SHARED, m_skins, counter, models.Length);
-                        Dispatcher.main.Dispatch(() => LogAndUpdateStatusInfo($"[{counter}/{models.Length}] Folder {vehicleName} loaded"));
+                        Dispatcher.main.Dispatch(() => LogAndUpdateStatusInfo($"[{counter}/{models.Length}] Trying load folder {vehicleName}"));
+                        if (prefabsData.TryGetValue(vehicleName, out var data))
+                        {
+                            LoadFromFolder(folderFull, data.Info as VehicleInfo, Source.SHARED, m_skins, counter, models.Length);
+                            Dispatcher.main.Dispatch(() => LogAndUpdateStatusInfo($"[{counter}/{models.Length}] Folder {vehicleName} loaded"));
+                        }
+                        else
+                        {
+                            Dispatcher.main.Dispatch(() => LogErrorAndUpdateStatusInfo($"[{counter}/{models.Length}] Folder {vehicleName} failed! Info not found!"));
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        Dispatcher.main.Dispatch(() => LogErrorAndUpdateStatusInfo($"[{counter}/{models.Length}] Folder {vehicleName} failed! Info not found!"));
+                        Dispatcher.main.Dispatch(() => LogErrorAndUpdateStatusInfo($"[{counter}/{models.Length}] Error while reading folder {vehicleName}: {e.Message}", e));
                     }
                 }
-                catch (Exception e)
+                Dispatcher.main.Dispatch(() =>
                 {
-                    Dispatcher.main.Dispatch(() => LogErrorAndUpdateStatusInfo($"[{counter}/{models.Length}] Error while reading folder {vehicleName}: {e.Message}", e));
-                }
+                    LogAndUpdateStatusInfo($"Scan thread ended!");
+                    LogUtils.FlushBuffer();
+                });
             }
-
-            m_reloadThread = null;
-            Dispatcher.main.Dispatch(() =>
+            catch (Exception e)
             {
-                LogAndUpdateStatusInfo($"Scan thread ended!");
-                LogUtils.FlushBuffer();
-            });
+                LogErrorAndUpdateStatusInfo($"Error executing loading thread!", e);
+                Thread.Sleep(5000);
+            }
+            finally
+            {
+                m_reloadThread = null;
+            }
 
         }
 

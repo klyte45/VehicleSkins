@@ -1,5 +1,8 @@
 <color=yellow>Welcome to Vehicle Skins 1.1!</color>
 
+<color=green>r7 (08/FEB/23)</color>
+- Fixed issue when there's no Skins folder created at appdata.
+
 <color=green>r6 (05/FEB/23)</color>
 - Added strings for languages: de, es, fr, it, ja, ko, pl, pt, ru, th & zh. Feel free to propose fix for any issue found in translations at Crowdin!
 - Fixed issue related to the mod making the default skin to be erased, causing Null Pointers and invisible vehicles on vanilla models
