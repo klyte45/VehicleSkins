@@ -195,6 +195,6 @@
     <value>Force skin in current selected vehicle</value>
   </data>
   <data name="vs_vsStillLoadingSkins" xml:space="preserve">
-    <value>Vehicle Skins is loading skins...</value>
+    <value>Vehicle Skins กำลังโหลดรูปลักษณ์...</value>
   </data>
 </root>
